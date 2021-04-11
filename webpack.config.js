@@ -31,10 +31,6 @@ module.exports = {
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js'],
-        alias: {
-          '@': path.resolve(__dirname, 'src'),
-          '@components': path.resolve(__dirname, 'src/components'),
-        },
     },
     devtool: isDev ? 'source-map' : false,
     devServer: {

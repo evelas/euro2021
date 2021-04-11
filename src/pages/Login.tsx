@@ -1,6 +1,6 @@
 import React from 'react'
-import Footer from '../components/Footer';
-import Header from '../components/Header';
+import Footer from '@components/Footer';
+import Header from '@components/Header';
 
 const Login: React.FC = () => {
   return (
@@ -15,7 +15,7 @@ const Login: React.FC = () => {
             <div className="login__forgot">
               <input className="login__checkbox" type="checkbox" name="forgotMe" id="forgotMe"/>
               <label className="login__label" htmlFor="forgotMe">Не запоминать</label>
-            </div> 
+            </div>
             <button className="login__button" type="button">Войти</button>
           </div>
         </form>
