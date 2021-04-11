@@ -1,11 +1,17 @@
 {
-  "compilerOptions": {
-    "outDir": "./build",
-    "sourceMap": true,
-    "target": "es5",
-    "module": "es6",
-    "jsx": "react",
-    "noImplicitAny": true,
-    "allowSyntheticDefaultImports": true
+    "compilerOptions": {
+      "outDir": "./build",
+      "sourceMap": true,
+      "target": "es5",
+      "module": "es6",
+      "jsx": "react",
+      "noImplicitAny": true,
+      "allowSyntheticDefaultImports": true,
+
+      "baseUrl": ".",
+      "paths": {
+        "@components/*": ["./src/components/*"]
+      }
+    }
+
   }
-}
