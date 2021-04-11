@@ -1,5 +1,4 @@
- .login {
-
+.login {
   &__form {
     background-color: $main;
     max-width: 525px;
@@ -50,38 +49,38 @@
 
   &__checkbox {
     all: unset;
-    position: relative; 
-    display: block; 
-    box-sizing: border-box; 
-    width: 42px; 
-    height: 26px; 
+    position: relative;
+    display: block;
+    box-sizing: border-box;
+    width: 42px;
+    height: 26px;
     padding: 5px;
-    border-radius: 15px; 
+    border-radius: 15px;
     background-color: $secondary;
     transition: 0.2s;
     &::before {
-      content: ""; 
-      display: block; 
-      box-sizing: border-box; 
+      content: "";
+      display: block;
+      box-sizing: border-box;
       transition: 0.2s;
-      width: 15px; 
-      height: 15px; 
+      width: 15px;
+      height: 15px;
       border-radius: 50%;
-      border: solid 4px $white; 
+      border: solid 4px $white;
       background-color: red;
     }
     &:checked {
       background-color: $secondary;
       &::before {
-        background-color: green; 
+        background-color: green;
         transform: translateX(17px);
       }
     }
-    &:hover, 
+    &:hover,
     &:focus {
       &:not(:disabled) {
-        outline: none; 
-        box-shadow: 0 0 1px $white, 0 0 3px $white, 0 0 6px #0ba9ca; 
+        outline: none;
+        box-shadow: 0 0 1px $white, 0 0 3px $white, 0 0 6px #0ba9ca;
         cursor: pointer;
       }
     }
@@ -123,4 +122,4 @@
     border-radius: 5px;
     cursor: pointer;
   }
- }
+}

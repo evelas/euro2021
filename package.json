@@ -12,7 +12,8 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack serve",
     "build": "cross-env NODE_ENV=production webpack --mode production",
-    "lint": "npx eslint ./src"
+    "lint": "npx eslint ./src",
+    "editorconfig": "editorconfig-checker"
   },
   "devDependencies": {
     "@types/react": "^17.0.3",
@@ -25,6 +26,7 @@
     "cross-env": "^7.0.3",
     "css-hot-loader": "^1.4.4",
     "css-loader": "^5.2.1",
+    "editorconfig-checker": "^4.0.2",
     "eslint": "^7.24.0",
     "eslint-import-resolver-typescript": "^2.4.0",
     "eslint-plugin-import": "^2.22.1",
