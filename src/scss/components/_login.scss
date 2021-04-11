@@ -1,0 +1,126 @@
+ .login {
+
+  &__form {
+    background-color: $main;
+    max-width: 525px;
+    padding: 50px 70px;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: 12rem;
+    position: relative;
+    top: 150px;
+    @media (max-width: $desktop) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 0;
+      margin: 0 auto;
+    }
+    @media (max-width: $tablet) {
+      margin: 0 35px;
+    }
+  }
+
+  &__title {
+    text-transform: uppercase;
+    color: $white;
+    font-size: 23px;
+    line-height: 35.38px;
+    margin-top:0;
+    text-align: center;
+  }
+
+  &__input {
+    width: 385px;
+    min-height: 48px;
+    border-radius: 10px;
+    border: 5px solid $white;
+    outline: none;
+    background-color: $white;
+
+    padding-left: 10px;
+    margin-bottom: 15px;
+
+    @media (max-width: $tablet) {
+      width: 220px;
+      min-height: 38px;
+    }
+  }
+
+  &__checkbox {
+    all: unset;
+    position: relative; 
+    display: block; 
+    box-sizing: border-box; 
+    width: 42px; 
+    height: 26px; 
+    padding: 5px;
+    border-radius: 15px; 
+    background-color: $secondary;
+    transition: 0.2s;
+    &::before {
+      content: ""; 
+      display: block; 
+      box-sizing: border-box; 
+      transition: 0.2s;
+      width: 15px; 
+      height: 15px; 
+      border-radius: 50%;
+      border: solid 4px $white; 
+      background-color: red;
+    }
+    &:checked {
+      background-color: $secondary;
+      &::before {
+        background-color: green; 
+        transform: translateX(17px);
+      }
+    }
+    &:hover, 
+    &:focus {
+      &:not(:disabled) {
+        outline: none; 
+        box-shadow: 0 0 1px $white, 0 0 3px $white, 0 0 6px #0ba9ca; 
+        cursor: pointer;
+      }
+    }
+  }
+
+  &__forgot {
+    display: flex;
+    align-items: center;
+    @media (max-width: $tablet) {
+      order: 1;
+      margin-top: 20px;
+    }
+  }
+
+  &__label {
+    color: white;
+    margin-left: 10px;
+    cursor: pointer;
+  }
+
+  &__footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+    @media (max-width: $tablet) {
+      flex-direction: column;
+    }
+  }
+
+  &__button {
+    color: white;
+    background-color: $secondary;
+    padding: 10px 42px;
+    font-size: 18px;
+    text-transform: uppercase;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+ }

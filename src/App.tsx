@@ -1,5 +1,8 @@
 import React from 'react';
+import { Home } from './pages/index';
 
-export default function App(){
-    return <h1>Hello, world!</h1>
+const App: React.FC = () => {
+    return <Home/>  
 }
+
+export default App
