@@ -1,0 +1,56 @@
+@font-face {
+  font-family: 'Myriad Pro';
+  src: url('./fonts/MyriadProBold.eot');
+  src: local('./fonts/MyriadProBold'), local('MyriadProBold'),
+    url('./fonts/MyriadProBold.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/MyriadProBold.woff') format('woff'),
+    url('./fonts/MyriadProBold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Myriad Pro';
+  src: url('./fonts/MyriadProRegular.eot');
+  src: local('./fonts/MyriadProRegular'), local('MyriadProRegular'),
+    url('./fonts/MyriadProRegular.eot?#iefix') format('embedded-opentype'),
+    url('./fonts/MyriadProRegular.woff') format('woff'),
+    url('./fonts/MyriadProRegular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Bridge Type';
+  src: url('./fonts/BridgeType/BridgeType-Regular.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PFBeauSansPro';
+  src: url('./fonts/Beausanspro/PFBeauSansPro-Bold.ttf');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PFBeauSansPro';
+  src: url('./fonts/Beausanspro/PFBeauSansPro-Reg.ttf');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PFBeauSansPro';
+  src: url('./fonts/Beausanspro/PFBeauSansPro-Light.ttf');
+  font-weight: lighter;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'PFBeauSansPro';
+  src: url('./fonts/Beausanspro/PFBeauSansPro-SeBold.ttf');
+  font-weight: 600;
+  font-style: normal;
+}

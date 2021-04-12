@@ -1,3 +1,45 @@
-body {
-  background-color: red;
+@import 'variables';
+@import 'fonts';
+@import '~normalize.css';
+@import 'components/all';
+
+h1 {
+  font-family: Bridge Type;
+}
+h2, h3, h4 {
+  font-family: PFBeauSansPro;
+  font-weight: 600;
+}
+
+button {
+  font-family: PFBeauSansPro;
+  font-weight: normal;
+}
+
+* {
+  box-sizing: inherit;
+}
+
+hr {
+  margin: 0;
+}
+
+.page {
+  font-family: PFBeauSansPro;
+  height: 100%;
+  box-sizing: border-box;
+  &__body {
+    height: 100%;
+  }
+  &__root {
+    background-image: url(../assets/img/background.png);
+    background-size: 100%;
+    background-position: left top;
+    background-repeat: no-repeat;
+    margin: 0 auto;
+
+    min-height: 100%;
+    display: grid;
+    grid-template-rows: auto 1fr auto;
+  }
 }

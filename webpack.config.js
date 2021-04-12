@@ -30,7 +30,7 @@ module.exports = {
       path: path.resolve(__dirname, 'build')
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js']
+        extensions: ['.ts', '.tsx', '.js'],
     },
     devtool: isDev ? 'source-map' : false,
     devServer: {
@@ -50,6 +50,17 @@ module.exports = {
               'css-loader',
               'sass-loader',
             ],
+          },
+          {
+            test: /\.(woff|woff2|ttf|eot)$/,
+            use: 'file-loader?name=fonts/[name].[ext]!static'
+          },
+          {
+            test: /\.(png|jpe?g|gif|jp2|webp)$/,
+            loader: 'file-loader',
+            options: {
+              name: 'images/[name].[ext]'
+            }
           },
           {
               test: /\.tsx?$/,

@@ -1,0 +1,24 @@
+.header {
+  padding: 4em 0 0 6em;
+
+  @media (max-width: $tablet) {
+    padding-left: 30px;
+  }
+  &__title {
+    font-size: 4em;
+    text-transform: uppercase;
+    color: $main;
+    margin: 0;
+    margin-bottom: 10px;
+    @media (max-width: $tablet) {
+      font-size: 2em;
+    }
+  }
+  &__about {
+    margin: 0;
+    text-transform: uppercase;
+    @media (max-width: $tablet) {
+      font-size: 1.2em;
+    }
+  }
+}
