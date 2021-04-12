@@ -1,0 +1,23 @@
+name: ESLint
+# Слушаем события  пул реквест в мастер и пуш в мастер
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+# Работы
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      # checkout@v2 - изготовленный гитхабом чекаутит на отдельный вновь созданный сервер
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      # сi не continuous integration, а подобие npm i для автоматизации
+      - run: npm ci
+      - run: npm run eslint
