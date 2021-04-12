@@ -13,7 +13,7 @@
     "start": "cross-env NODE_ENV=development webpack serve",
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "eslint": "npx eslint ./src",
-    "editorconfig": "editorconfig-checker --exclude '.yarn'"
+    "editorconfig": "editorconfig-checker"
   },
   "devDependencies": {
     "@types/react": "^17.0.3",
