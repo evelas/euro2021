@@ -1,4 +1,4 @@
-name: EditorConfig
+name: editorConfig
 # Слушаем события  пул реквест в мастер и пуш в мастер
 on:
   pull_request:
@@ -11,13 +11,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [10.x]
     steps:
       # checkout@v2 - изготовленный гитхабом чекаутит на отдельный вновь созданный сервер
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
+      - uses: borales/actions-yarn@v1.22.5
         with:
           node-version: ${{ matrix.node-version }}
-      # сi не continuous integration, а подобие npm i для автоматизации
-      - run: npm ci
-      - run: npm run editorconfig
+        with:
+          cmd: install # will run `yarn install` command
+        with:
+          cmd: editorconfig # will run `yarn editorconfig` command
