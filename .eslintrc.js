@@ -21,6 +21,11 @@ module.exports = {
         "react",
         "@typescript-eslint"
     ],
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    },
     "rules": {
         '@typescript-eslint/no-var-requires': 0
     }
