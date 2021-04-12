@@ -1,13 +1,12 @@
-name: ESlint
+name: Deploy
 
 on:
-  pull_request:
   push:
     branches:
-      - master
+      - workflows
 
 jobs:
-  lint:
+  deploy:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -19,5 +18,13 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+      # Setup key
+      - run: set -eu
+      - run: mkdir "$HOME/.ssh"
+      - run: echo "${{ secrets.KEY }}" > "$HOME/.ssh/key"
+      - run: chmod 600 "$HOME/.ssh/key"
+      # Build
       - run: npm ci
-      - run: npm run eslint
+      - run: npm run build
+      # Deploy
+      - run: cd build && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . u0249059_evelas@31.31.196.2:/www/volspb.ru/html

@@ -13,7 +13,8 @@
     "start": "cross-env NODE_ENV=development webpack serve",
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "eslint": "npx eslint ./src",
-    "editorconfig": "editorconfig-checker"
+    "editorconfig": "editorconfig-checker",
+    "deploy": "cd build && rsync  --archive --compress --delete . u0249059_evelas@31.31.196.2:/www/volspb.ru/html"
   },
   "devDependencies": {
     "@types/react": "^17.0.3",
