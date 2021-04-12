@@ -1,18 +1,21 @@
-name: editorconfig
+name: EditorConfig
+
 on:
   pull_request:
   push:
     branches:
       - master
+
 jobs:
-  build:
-    name: editorconfig
+  lint:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
     steps:
       - uses: actions/checkout@v2
-      - uses: borales/actions-yarn@v2.0.0
+      - uses: actions/setup-node@v1
         with:
-          cmd: install # will run `yarn install` command
-      - uses: borales/actions-yarn@v2.0.0
-        with:
-          cmd: editorconfig # will run `yarn editorconfig` command
+          node-version: ${{ matrix.node-version }}
+      - run: npm ci
+      - run: npm run editorconfig
