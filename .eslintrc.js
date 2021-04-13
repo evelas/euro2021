@@ -10,6 +10,7 @@ module.exports = {
         "plugin:react/recommended",
         "plugin:@typescript-eslint/recommended"
     ],
+
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": {
@@ -27,6 +28,7 @@ module.exports = {
       }
     },
     "rules": {
-        '@typescript-eslint/no-var-requires': 0
+        '@typescript-eslint/no-var-requires': 0,
+        '@typescript-eslint/explicit-module-boundary-types': 0
     }
 };

@@ -30,10 +30,9 @@ module.exports = {
       path: path.resolve(__dirname, 'build')
     },
     resolve: {
+        // modules: ['src', 'node_modules'],
         extensions: ['.ts', '.tsx', '.js'],
-        alias: {
-          '@components': path.resolve(__dirname, 'src/components'),
-        },
+
     },
     devtool: isDev ? 'source-map' : false,
     devServer: {
@@ -95,8 +94,8 @@ module.exports = {
               collapseWhitespace: isProd,
             }
         }),
-        new webpack.DefinePlugin({
-          'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
+        new webpack.ProvidePlugin({
+          process: 'process/browser',
         }),
     ]
 }
