@@ -27,4 +27,4 @@ jobs:
       - run: npm ci
       - run: npm run build
       # Deploy
-      - run: cd build && rsync -e "ssh -i $HOME/.ssh/key -o StrictHostKeyChecking=no" --archive --compress --delete . u127105@185.179.190.245:/www/dobro/html
+      - run: cd build && rsync -e "ssh -i $HOME/.ssh/key -p 9999 -o StrictHostKeyChecking=no" --archive --compress --delete . u127105@185.179.190.245:/www/dobro/html
