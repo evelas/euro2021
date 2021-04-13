@@ -14,7 +14,7 @@
     "build": "cross-env NODE_ENV=production webpack --mode production",
     "eslint": "npx eslint ./src",
     "editorconfig": "editorconfig-checker",
-    "deploy": "cd build && rsync  --archive --compress --delete . u127105@185.179.190.245:/www/dobro/html"
+    "deploy": "cd build && rsync --archive --compress --delete . u0249059@31.31.196.2:/var/www/u0249059/data/www/volspb.ru/dashboard/"
   },
   "devDependencies": {
     "@types/react": "^17.0.3",
