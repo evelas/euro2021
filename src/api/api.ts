@@ -1,6 +1,6 @@
 import Axios  from 'axios';
 
-import { resultCodeEnum } from './../Enum/resultCode';
+import { resultCodeEnum } from './../enum/resultCode';
 
 
 export const instansAxios = Axios.create({
