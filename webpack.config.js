@@ -30,17 +30,21 @@ module.exports = {
       publicPath: '/dashboard/'
     },
     resolve: {
-        // modules: ['src', 'node_modules'],
         extensions: ['.ts', '.tsx', '.js'],
 
     },
     devtool: isDev ? 'source-map' : false,
     devServer: {
+
       port: 8080,
+      openPage: 'dashboard/',
       hot: true,
+      publicPath: "/dashboard",
       open: true,
       // for BrowserRouter
-      historyApiFallback: true,
+      historyApiFallback: {
+        index: '/dashboard',
+      }
     },
     module: {
       rules: [
