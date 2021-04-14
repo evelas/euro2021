@@ -27,7 +27,7 @@ module.exports = {
     output: {
       filename: filename('js'),
       path: path.resolve(__dirname, 'build'),
-      publicPath: '/'
+      publicPath: '/dashboard/'
     },
     resolve: {
         // modules: ['src', 'node_modules'],
