@@ -2,8 +2,8 @@ import React from 'react';
 // import classNames from 'classnames';
 
 // eslint-disable-next-line
-export const Input = (props: any) => {
-  // const hasError = touched && error;
+export const Input = ({ input, meta: { touched, error }, ...props }: any) => {
+  const hasError = touched && error;
   console.log('input:', props)
   return (
     // <div
@@ -14,9 +14,9 @@ export const Input = (props: any) => {
     //       (touched && hasError === 'Пароли не совпадают'),
     //   })}>
     <div>
-      <input {...props} />
-      {/* <input {...input} {...props} />
-      {hasError && <span> {error}</span>} */}
+      {/* <input {...props} /> */}
+      <input {...input} {...props} />
+      {hasError && <span> {error}</span>}
     </div>
   );
 };

@@ -10,6 +10,7 @@ import { LoginFormValuesType, PayloadType, ProfileType } from './../../types/typ
 // Login
 async function getLogin(login: string, password: string, forgotMe: boolean) {
   const response = await authApi.login(login, password, forgotMe);
+  console.log('response--> ', response)
   return response.data;
 }
 // 1 параметр генератора StrictEffect

@@ -4,10 +4,6 @@ import { authActions, TypesAuth } from '../actions/auth';
 
 type InitialStateType = typeof initialState;
 type ActionsType = InferActionsTypes<typeof authActions>;
-// // ActionsType без infer
-// type ActionsTypeWithOutInfer =  ReturnType<typeof authActions.setAuthUserData> |
-//                                 ReturnType<typeof authActions.setTryTimeButton> |
-//                                 ReturnType<typeof authActions.toggleIsFetching>;
 
 const initialState = {
   profile: null as Nullable<ProfileType>,

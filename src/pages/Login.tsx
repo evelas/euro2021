@@ -9,7 +9,7 @@ import { authActions } from '../redux/actions/auth';
 
 
 const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnProps> & LoginFormOwnProps> = (props) => {
-  console.log('login page', props)
+  // console.log('login page', props)
   return (
     // eslint-disable-next-line
     <form className="login__form" onSubmit={props.handleSubmit}>
@@ -58,7 +58,7 @@ const Login: React.FC = () => {
       formData.password,
       formData.forgotMe),
     );
-    console.log(formData)
+    console.log('formData-->', formData)
   };
 
   return (
