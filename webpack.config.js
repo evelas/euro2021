@@ -21,13 +21,13 @@ const jsLoaders = () => {
 };
 
 module.exports = {
-    mode: 'development',
     entry: {
         app: path.join(__dirname, 'src', 'index.tsx')
     },
     output: {
       filename: filename('js'),
-      path: path.resolve(__dirname, 'build')
+      path: path.resolve(__dirname, 'build'),
+      publicPath: '/'
     },
     resolve: {
         // modules: ['src', 'node_modules'],
@@ -39,6 +39,8 @@ module.exports = {
       port: 8080,
       hot: true,
       open: true,
+      // for BrowserRouter
+      historyApiFallback: true,
     },
     module: {
       rules: [
