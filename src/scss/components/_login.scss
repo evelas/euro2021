@@ -7,7 +7,7 @@
     margin-left: auto;
     margin-right: 12rem;
     position: relative;
-    top: 150px;
+    top: 100px;
     @media (max-width: $desktop) {
       display: flex;
       flex-direction: column;
@@ -130,6 +130,6 @@
   &__error {
     color: red;
     position: absolute;
-    margin-top: 10px;
+    bottom: 15px;
   }
 }

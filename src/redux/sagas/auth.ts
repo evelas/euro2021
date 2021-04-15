@@ -5,11 +5,9 @@ import { ApiTypes } from './../../api/api';
 import { authApi } from '../../api/authApi';
 import { LoginFormValuesType, PayloadType, ProfileType } from './../../types/types';
 
-
 // Login
 async function getLogin(login: string, password: string, forgotMe: boolean) {
   const response = await authApi.login(login, password, forgotMe);
-  console.log('response--> ', response)
   return response.data;
 }
 // 1 параметр генератора StrictEffect
@@ -22,26 +20,26 @@ function* workerGetLogin(action: PayloadType<LoginFormValuesType>): Generator<Ef
       action.payload.password,
       action.payload.forgotMe,
     );
-
-    if (data.resultCode === resultCodeEnum.Success) {
-      console.log('data from login saga', data);
-      // запускаем auth Saga
-      yield Effects.put(authActions.loadUserData());
-      yield Effects.put(authActions.resetError())
-    } else {
-      if (data.resultCode === resultCodeEnum.ToMuchAttempt) {
-        // слишком много попыток - блокируем кнопку - запускаем timer
+    console.log('data from login saga', data);
+    switch(data.resultCode) {
+      case resultCodeEnum.Success:
+        yield Effects.put(authActions.loadUserData());
+        yield Effects.put(authActions.resetError())
+        break;
+      case resultCodeEnum.EmailOrPasswordIsWrong:
+        yield Effects.put(authActions.addError(data.message))
+        break;
+      // case resultCodeEnum.AccountIsNotActivated:
+      //   yield Effects.put(authActions.addError(data.message))
+      //   break;
+      case resultCodeEnum.ToMuchAttempt:
         yield Effects.put(authActions.resetError())
         yield Effects.put(authActions.setTryTimeButton(true));
-      }
-      if (data.resultCode === resultCodeEnum.AccountIsNotActivated) {
-        yield Effects.put(authActions.addError(data.message))
-      }
-      if (data.resultCode === resultCodeEnum.EmailOrPasswordIsWrong) {
-        yield Effects.put(authActions.addError(data.message))
-      }
-
+        break;
+      default:
+        return;
     }
+
   } catch (e) {
     const message = 'Сервер перегружен. Пожалуйста, подождите 10 минут.';
     yield Effects.put(authActions.addError(message))
