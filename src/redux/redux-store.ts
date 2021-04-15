@@ -18,7 +18,9 @@ const saga = createSagaMiddleware();
 
 const configureStore = () => {
   const store = createStore(persistedReducer, applyMiddleware(thunkMiddleware, saga));
-
+  // eslint-disable-next-line
+  // @ts-ignore
+  window.store = store;
 
   saga.run(rootSaga);
   const persistor = persistStore(store);

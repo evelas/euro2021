@@ -121,5 +121,15 @@
     outline: none;
     border-radius: 5px;
     cursor: pointer;
+    &:disabled {
+      opacity: 0.5;
+      cursor: no-drop;
+    }
+  }
+
+  &__error {
+    color: red;
+    position: absolute;
+    margin-top: 10px;
   }
 }

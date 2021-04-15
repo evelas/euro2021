@@ -1,5 +1,4 @@
 import * as Effects from "redux-saga/effects";
-import { stopSubmit } from 'redux-form';
 import { authActions, TypesAuth } from '../actions/auth';
 import { resultCodeEnum } from '../../enum/resultCode';
 import { ApiTypes } from './../../api/api';
@@ -23,25 +22,29 @@ function* workerGetLogin(action: PayloadType<LoginFormValuesType>): Generator<Ef
       action.payload.password,
       action.payload.forgotMe,
     );
-    console.log('data from login saga2', data)
+
     if (data.resultCode === resultCodeEnum.Success) {
-      console.log('data from login saga', data)
+      console.log('data from login saga', data);
       // запускаем auth Saga
       yield Effects.put(authActions.loadUserData());
+      yield Effects.put(authActions.resetError())
     } else {
       if (data.resultCode === resultCodeEnum.ToMuchAttempt) {
-        // слишком много попыток - блокируем кнопку
+        // слишком много попыток - блокируем кнопку - запускаем timer
+        yield Effects.put(authActions.resetError())
         yield Effects.put(authActions.setTryTimeButton(true));
       }
       if (data.resultCode === resultCodeEnum.AccountIsNotActivated) {
-        // TODO: Аккаунт не активирован
+        yield Effects.put(authActions.addError(data.message))
       }
-      const message = data.message;
-      yield Effects.put(stopSubmit('login', { _error: message }));
+      if (data.resultCode === resultCodeEnum.EmailOrPasswordIsWrong) {
+        yield Effects.put(authActions.addError(data.message))
+      }
+
     }
   } catch (e) {
     const message = 'Сервер перегружен. Пожалуйста, подождите 10 минут.';
-    yield Effects.put(stopSubmit('login', { _error: message }));
+    yield Effects.put(authActions.addError(message))
   }
 }
 

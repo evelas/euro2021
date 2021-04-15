@@ -1,14 +1,9 @@
 import { combineReducers } from 'redux';
 
-// import { LoginFormValuesType, ServerResponse, ProfileType } from './../../types/types';
-
 import auth from './auth';
-import { reducer as form } from 'redux-form';
 
 const reducers = combineReducers({
-  auth,
-  form
-
+  auth
 });
 
 type RootReducerType = typeof reducers;

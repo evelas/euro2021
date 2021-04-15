@@ -11,6 +11,8 @@ export const TypesAuth = {
   SET_LOGOUT: '/reducers/auth/SET_LOGOUT' as const,
   TRY_TIME_DISABLED: '/reducers/auth/TRY_TIME_DISABLED' as const,
   IS_FETCHING: '/reducers/auth/IS_FETCHING' as const,
+  IS_ERROR: '/reducers/auth/IS_ERROR' as const,
+  RESET_ERROR: '/reducers/auth/RESET_ERROR' as const,
 };
 
 export const authActions = {
@@ -43,5 +45,12 @@ export const authActions = {
     type: TypesAuth.IS_FETCHING,
     payload: isFetching,
   }),
+  addError: (formError: string) => ({
+    type: TypesAuth.IS_ERROR,
+    payload: formError
+  }),
+  resetError: () => ({
+    type: TypesAuth.RESET_ERROR
+  })
 };
 
