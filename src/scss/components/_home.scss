@@ -30,6 +30,8 @@
     font-size: 14px;
     margin-right: 7px;
     outline: none;
+
+    padding-right: 35px;
     &_id {
       width: 60px;
     }
@@ -53,5 +55,20 @@
 
   &__id {
     width: 49px;
+  }
+
+  &__button {
+    background-image:  url(../assets/img/search-icon.png);
+    background-size: 21px;
+    width: 21px;
+    height: 21px;
+    background-color: transparent;
+    border: none;
+    position: relative;
+    top: 5px;
+    right: 36px;
+    z-index: 10000;
+    cursor: pointer;
+    outline: none;
   }
 }

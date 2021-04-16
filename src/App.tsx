@@ -7,7 +7,7 @@ const App = withRouter(() => {
   return (
     <Switch>
       <Route exact path="/dashboard/" component={Login} />
-      <Route path="/dashboard/home2" component={Home} />
+      <Route path="/dashboard/home" component={Home} />
       <Route path="/dashboard/*" component={NotFound} />
 
     </Switch>

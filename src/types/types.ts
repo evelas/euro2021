@@ -18,3 +18,8 @@ export type LoginFormOwnProps = {
 export type PayloadType<T> = {
   payload: T;
 }
+
+export type SearchFullNameType = {
+  id: number;
+  fullName: string;
+}

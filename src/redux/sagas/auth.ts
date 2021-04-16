@@ -36,6 +36,9 @@ function* workerGetLogin(action: PayloadType<LoginFormValuesType>): Generator<Ef
         yield Effects.put(authActions.resetError())
         yield Effects.put(authActions.setTryTimeButton(true));
         break;
+      case null:
+        yield Effects.put(authActions.addError('Сервер перегружен. Пожалуйста, подождите 10 минут.'));
+        break;
       default:
         return;
     }

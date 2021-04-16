@@ -39,7 +39,7 @@
     background-color: $white;
 
     padding-left: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 
     @media (max-width: $tablet) {
       width: 220px;
@@ -131,5 +131,11 @@
     color: red;
     position: absolute;
     bottom: 15px;
+  }
+
+  &__validate {
+    margin-bottom: 15px;
+    height: 15px;
+    color: red
   }
 }

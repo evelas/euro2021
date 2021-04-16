@@ -1,4 +1,5 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 
@@ -9,12 +10,14 @@ import { Field, Form, Formik, FormikHelpers, FormikValues } from 'formik';
 import { AppStateType } from '../redux/reducers';
 
 import Timer from '../components/common/Timer';
+import { validateLoginForm } from '../helpers/validators/loginForm';
 
 const Login: React.FC = () => {
 
   const dispatch = useDispatch();
-  const isError = useSelector((state: AppStateType) => state.auth.formError);
+  const formError = useSelector((state: AppStateType) => state.auth.formError);
   const isTryTime = useSelector((state: AppStateType) => state.auth.isTryTime);
+  const isAuth = useSelector((state: AppStateType) => state.auth.isAuth);
 
   const initialValues = { login: '', password: '', forgotMe: false } as LoginFormValuesType;
 
@@ -26,6 +29,11 @@ const Login: React.FC = () => {
     );
     setSubmitting(false);
   }
+
+  if (isAuth) {
+    return <Redirect to="/home" />;
+  }
+
   return (
     <>
       <Header />
@@ -33,15 +41,21 @@ const Login: React.FC = () => {
         <Formik
           initialValues={initialValues}
           onSubmit={submit}
+          validate={validateLoginForm}
         >
           {({
             isSubmitting,
+            errors,
+            touched
           }) => (
             <Form className="login__form">
               <h3 className="login__title">Вход в систему</h3>
 
               <Field className="login__input" type="email" name="login" />
+              <div className="login__validate">{errors.login && touched.login && errors.login}</div>
+
               <Field className="login__input" type="password" name="password" />
+              <div className="login__validate">{errors.password && touched.password && errors.password}</div>
 
               <div className="login__footer">
                 <div className="login__forgot">
@@ -53,7 +67,7 @@ const Login: React.FC = () => {
                   Войти
                 </button>
               </div>
-              {isError ? (<div className="login__error">{isError}</div>) : null}
+              {formError ? (<div className="login__error">{formError}</div>) : null}
               {isTryTime && (
                 <Timer
                   visible={isTryTime}
@@ -70,4 +84,4 @@ const Login: React.FC = () => {
   )
 }
 
-export default Login
+export default Login;
