@@ -1,6 +1,6 @@
 import { ProfileType, Nullable } from '../../types/types';
 import { InferActionsTypes } from './index';
-import { authActions, TypesAuth } from '../actions/auth';
+import { authActions, TypesAuth } from '../actions';
 
 type InitialStateType = typeof initialState;
 type ActionsType = InferActionsTypes<typeof authActions>;

@@ -31,7 +31,7 @@ const Login: React.FC = () => {
   }
 
   if (isAuth) {
-    return <Redirect to="/home" />;
+    return <Redirect to="/dashboard/home" />;
   }
 
   return (

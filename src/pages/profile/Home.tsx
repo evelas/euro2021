@@ -14,7 +14,7 @@ const Home: React.FC = () => {
 
 
   const searchAnswer = useSelector((state: AppStateType) => state.search.searchAnswer);
-
+  const notFound = useSelector((state: AppStateType) => state.search.notFound);
 
   const initialValues = { text: '' };
 
@@ -51,7 +51,7 @@ const Home: React.FC = () => {
         <div className="home__result">
         {searchAnswer &&
         searchAnswer.map((item) => <ItemsSearch key={item.id} {...item} />)}
-
+        {notFound && (<div className="home__notfound">{notFound}</div>)}
         </div>
       </main>
       <Footer />

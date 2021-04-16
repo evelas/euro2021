@@ -2,10 +2,12 @@ import { combineReducers } from 'redux';
 
 import auth from './auth';
 import search from './search'
+import userProfile from './userProfile'
 
 const reducers = combineReducers({
   auth,
-  search
+  search,
+  userProfile
 });
 
 type RootReducerType = typeof reducers;

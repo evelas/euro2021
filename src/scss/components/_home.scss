@@ -59,16 +59,20 @@
 
   &__button {
     background-image:  url(../assets/img/search-icon.png);
-    background-size: 21px;
-    width: 21px;
-    height: 21px;
+    background-size: 15px;
+    width: 15px;
+    height: 15px;
     background-color: transparent;
     border: none;
     position: relative;
-    top: 5px;
-    right: 36px;
+    top: 2px;
+    right: 33px;
     z-index: 10000;
     cursor: pointer;
     outline: none;
+  }
+
+  &__result {
+    padding: 5px 0 15px 0;
   }
 }
