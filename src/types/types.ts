@@ -51,3 +51,9 @@ export type SearchFullNameType = {
   id: number;
   fullName: string;
 }
+
+// save after edit profile
+export type ActionSaveEditType = {
+  formData: UserProfileType;
+  userId: number;
+}

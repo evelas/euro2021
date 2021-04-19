@@ -1,5 +1,5 @@
 import { instansAxios, ApiTypes } from "./api";
-import { ProfileType, SearchFullNameType } from '../types/types';
+import { SearchFullNameType, UserProfileType } from '../types/types';
 
 export const searchApi = {
   getSearch(text: string) {
@@ -8,7 +8,7 @@ export const searchApi = {
   getOneUser(id: number) {
     return instansAxios.get<ApiTypes>(`profile/${id}`);
   },
-  editProfile(formData: ProfileType, userId: number) {
+  editProfile(formData: UserProfileType, userId: number) {
     return instansAxios.patch<ApiTypes>(`profile/${userId}`, formData);
   },
 };

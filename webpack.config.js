@@ -39,7 +39,7 @@ module.exports = {
     devServer: {
 
       port: 8080,
-      openPage: 'dashboard/',
+      openPage: 'dashboard/home',
       hot: true,
       publicPath: "/dashboard",
       open: true,

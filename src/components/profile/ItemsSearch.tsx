@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { SearchFullNameType } from '../../../types/types'
+import { SearchFullNameType } from '../../types/types'
 
 
 const ItemsSearch: React.FC<SearchFullNameType> = ({id, fullName}: SearchFullNameType) => {

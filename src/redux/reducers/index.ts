@@ -11,6 +11,7 @@ const reducers = combineReducers({
 });
 
 type RootReducerType = typeof reducers;
+export type testAuth = ReturnType<typeof auth>;
 export type AppStateType = ReturnType<RootReducerType>;
 
 

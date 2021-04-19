@@ -6,7 +6,7 @@ import Header from '../components/Header';
 import { useDispatch, useSelector } from 'react-redux';
 import { LoginFormValuesType } from '../types/types';
 import { authActions } from '../redux/actions/auth';
-import { Field, Form, Formik, FormikHelpers, FormikValues } from 'formik';
+import { Field, Form, Formik, FormikHelpers } from 'formik';
 import { AppStateType } from '../redux/reducers';
 
 import Timer from '../components/common/Timer';
@@ -15,13 +15,11 @@ import { validateLoginForm } from '../helpers/validators/loginForm';
 const Login: React.FC = () => {
 
   const dispatch = useDispatch();
-  const formError = useSelector((state: AppStateType) => state.auth.formError);
-  const isTryTime = useSelector((state: AppStateType) => state.auth.isTryTime);
-  const isAuth = useSelector((state: AppStateType) => state.auth.isAuth);
 
+  const {formError, isTryTime, isAuth} = useSelector((state: AppStateType) => state.auth);
   const initialValues = { login: '', password: '', forgotMe: false } as LoginFormValuesType;
 
-  async function submit (values: FormikValues, { setSubmitting }: FormikHelpers<FormikValues>) {
+  async function submit (values: LoginFormValuesType, { setSubmitting }: FormikHelpers<LoginFormValuesType>) {
     dispatch(authActions.setLogin(
       values.login,
       values.password,

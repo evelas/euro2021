@@ -8,7 +8,9 @@ type ActionsType = InferActionsTypes<typeof searchActions>;
 
 const initialState = {
   searchAnswer: null as Nullable<Array<SearchFullNameType>>,
-  notFound: ''
+  searchText: '' as string | string[],
+  notFound: '',
+  isFetching: false,
 };
 
 const searchReducer = (state = initialState, action: ActionsType): InitialStateType => {
@@ -18,10 +20,20 @@ const searchReducer = (state = initialState, action: ActionsType): InitialStateT
         ...state,
         searchAnswer: action.payload,
       };
+    case TypesSearch.IS_FETCHING:
+      return {
+        ...state,
+        isFetching: action.payload,
+      };
     case TypesSearch.NOT_FOUND_ANY:
       return {
         ...state,
         notFound: action.payload,
+      };
+    case TypesSearch.TEXT_SEARCH_SAVE:
+      return {
+        ...state,
+        searchText: action.payload,
       };
     default:
       return state;
