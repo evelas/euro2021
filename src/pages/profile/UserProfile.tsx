@@ -3,9 +3,10 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router';
 import Preloader from '../../components/common/Preloader';
+import Menu from '../../components/menu/Menu';
 
 import UserDataHeader from '../../components/profile/UserDataHeader';
-import { userProfileActions } from '../../redux/actions';
+import { authActions, userProfileActions } from '../../redux/actions';
 import { AppStateType } from '../../redux/reducers';
 
 
@@ -21,11 +22,17 @@ const UserProfile: React.FC = () => {
     dispatch(userProfileActions.loadOneUser(idLocation));
   }, [pathname])
 
+  // проверка авторизации
+  React.useEffect(() => {
+    dispatch(authActions.loadUserData());
+  }, []);
+
   if(!isAuth) {
     return <Redirect to="/dashboard/"/>
   }
   return (
     <>
+      <Menu/>
       <main className="profile">
           {
             userData ?

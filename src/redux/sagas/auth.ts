@@ -63,15 +63,19 @@ function* workerGetAuth(): Generator<Effects.StrictEffect, void, never> {
   try {
     const data: ApiTypes<ProfileType> = yield Effects.call(getAuthUserData);
     console.log('data from auth saga', data)
+    yield Effects.put(authActions.toggleIsFetching(true));
     if (data.resultCode === resultCodeEnum.Success) {
-      yield Effects.put(authActions.toggleIsFetching(true));
       yield Effects.put(authActions.setAuthUserData(data.items, true));
-      yield Effects.delay(1500);
-      yield Effects.put(authActions.toggleIsFetching(false));
+
+
+    } else if (data.resultCode === resultCodeEnum.NotAuth) {
+      // TODO:
     }
   } catch (e) {
     console.error(e);
   }
+  yield Effects.delay(1500);
+  yield Effects.put(authActions.toggleIsFetching(false));
 }
 
 export function* watchGetAuth() {
@@ -89,6 +93,7 @@ function* workerGetLogout(): Generator<Effects.StrictEffect, void, never> {
     const data: ApiTypes = yield Effects.call(getLogout);
     if (data.resultCode === resultCodeEnum.Success) {
       yield Effects.put(authActions.setAuthUserData(null, false));
+
     }
   } catch (e) {
     console.error(e);
@@ -98,3 +103,6 @@ function* workerGetLogout(): Generator<Effects.StrictEffect, void, never> {
 export function* watchGetLogout() {
   yield Effects.takeEvery(TypesAuth.SET_LOGOUT, workerGetLogout);
 }
+
+
+

@@ -10,6 +10,7 @@ import Preloader from '../../components/common/Preloader';
 import { useHistory, Redirect } from 'react-router';
 import { authActions } from '../../redux/actions';
 import * as queryString from 'query-string';
+import Menu from '../../components/menu/Menu';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
@@ -17,16 +18,26 @@ const Home: React.FC = () => {
   const {search} = history.location;
   const formikRef = React.useRef(null);
 
-
   const { searchAnswer, notFound, isFetching } = useSelector((state: AppStateType) => state.search);
   const { isAuth } = useSelector((state: AppStateType) => state.auth);
 
+  // если изменился query search
+  React.useEffect(() => {
+    dispatch(searchActions.setSearchAnswer(null));
+    const parsed = queryString.parse(search)
+    if (parsed.search) {
+      dispatch(searchActions.loadSearch(parsed.search));
+      dispatch(searchActions.setSearchText(parsed.search))
+      formikRef.current.values.search = parsed.search;
+    }
+  }, [search])
 
   function submit (values: FormikValues, { setSubmitting }: FormikHelpers<FormikValues>) {
     if(values.search.length === 0) {
       dispatch(searchActions.setSearchAnswer(null));
-      dispatch(searchActions.notFoundAny('Введите текст'));
+      dispatch(searchActions.notFoundAny('Введите текст в поиск'));
     } else {
+      dispatch(searchActions.notFoundAny(''));
       history.push({
         pathname: '/dashboard/home',
         search: `?search=${values.search}`
@@ -40,22 +51,13 @@ const Home: React.FC = () => {
     dispatch(authActions.loadUserData());
   }, []);
 
-  // если изменился query search
-  React.useEffect(() => {
-    const parsed = queryString.parse(search)
-    dispatch(searchActions.loadSearch(parsed.search));
-    dispatch(searchActions.setSearchText(parsed.search))
-    // eslint-disable-next-line
-    formikRef.current!.values!.search = parsed.search;
-  }, [search])
-
-
   if(!isAuth) {
     return <Redirect to="/dashboard/"/>
   }
   return (
     <>
       <Header />
+      <Menu />
       <main className="home">
 
         <h4 className="home__title">Поиск по системе</h4>
