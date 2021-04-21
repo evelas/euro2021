@@ -66,10 +66,8 @@ function* workerGetAuth(): Generator<Effects.StrictEffect, void, never> {
     yield Effects.put(authActions.toggleIsFetching(true));
     if (data.resultCode === resultCodeEnum.Success) {
       yield Effects.put(authActions.setAuthUserData(data.items, true));
-
-
     } else if (data.resultCode === resultCodeEnum.NotAuth) {
-      // TODO:
+      // TODO: переделать редирект с isAuth на history push в saga
     }
   } catch (e) {
     console.error(e);
