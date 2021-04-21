@@ -8,6 +8,10 @@
     "jsx": "react",
     "noImplicitAny": true,
     "allowSyntheticDefaultImports": true,
+    "allowJs": true,
+    "esModuleInterop": true,
+    "lib": ["es5", "es6", "dom"],
+
   }
 
 }

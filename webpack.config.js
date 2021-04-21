@@ -14,7 +14,7 @@ const isDev = !isProd;
 const filename = (ext) => (isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`);
 
 const jsLoaders = () => {
-  const loaders = ['ts-loader'];
+  const loaders = ['babel-loader', 'ts-loader'];
 
   if (isDev) {
     // eslint-loader перешел в eslint-webpack-plugin
@@ -23,16 +23,18 @@ const jsLoaders = () => {
 };
 
 module.exports = {
-    entry: {
-        app: path.join(__dirname, 'src', 'index.tsx')
-    },
+    // entry: {
+    //     app: path.join(__dirname, 'src', 'index.tsx')
+    // },
+    context: path.resolve(__dirname, 'src'),
+    entry: ['@babel/polyfill', './index.tsx'],
     output: {
       filename: filename('js'),
       path: path.resolve(__dirname, 'build'),
       publicPath: '/dashboard/'
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js'],
+        extensions: ['.ts', '.tsx', '.js', '.jsx'],
 
     },
     devtool: isDev ? 'source-map' : false,
@@ -76,7 +78,12 @@ module.exports = {
               test: /\.tsx?$/,
               use: jsLoaders(),
               exclude: '/node_modules/'
-          }
+          },
+          {
+            test: /\.js$/,
+            use: ["source-map-loader"],
+            enforce: "pre"
+          },
       ],
     },
     plugins: [
