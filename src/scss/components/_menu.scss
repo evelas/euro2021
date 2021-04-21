@@ -1,0 +1,56 @@
+#burger {
+  position: fixed;
+  right: 25px;
+  top: 25px;
+  z-index: 1000;
+  font-size: 22px;
+  cursor: pointer;
+}
+.menu {
+  max-width: 270px;
+  display: block;
+  padding: 60px 20px;
+  background-color: #f9fbfc;
+  position: fixed;
+  text-align: center;
+  right: 0;
+  box-shadow: $black 1px 0px 7px 0px;
+  height: 100%;
+  z-index: 999;
+
+  &__link {
+    text-align: center;
+    text-decoration: none;
+  }
+
+  &__button {
+    background-color: #79bccd;
+    width: 200px;
+    height: 45px;
+    color: white;
+    font-size: 9.5px;
+    text-transform: uppercase;
+    margin: 14px 0;
+    border-radius: 10px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__search, &__cloud, &__recruit {
+    padding-left: 30px;
+    background-size: 200px 45px;
+  }
+
+  &__search {
+    background-image: url(../assets/img/search.png);
+  }
+
+  &__cloud {
+    background-image: url(../assets/img/cloud.png);
+  }
+
+  &__recruit {
+    background-image: url(../assets/img/recruit.png);
+  }
+}

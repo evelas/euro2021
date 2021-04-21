@@ -1,0 +1,12 @@
+RewriteEngine On
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -f [OR]
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_URI} -d
+RewriteRule ^ - [L]
+
+# Fallback all other routes to index.html
+RewriteRule ^ /dashboard/index.html [L]
+
+php_value session.gc_maxlifetime 2592000
+php_value session.cookie_lifetime 0
+
+

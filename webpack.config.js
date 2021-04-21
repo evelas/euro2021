@@ -7,6 +7,8 @@ const CopyPlugin = require('copy-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 const isProd = process.env.NODE_ENV === 'production';
+
+
 const isDev = !isProd;
 
 const filename = (ext) => (isDev ? `bundle.${ext}` : `bundle.[hash].${ext}`);
@@ -21,24 +23,30 @@ const jsLoaders = () => {
 };
 
 module.exports = {
-    mode: 'development',
     entry: {
         app: path.join(__dirname, 'src', 'index.tsx')
     },
     output: {
       filename: filename('js'),
-      path: path.resolve(__dirname, 'build')
+      path: path.resolve(__dirname, 'build'),
+      publicPath: '/dashboard/'
     },
     resolve: {
-        // modules: ['src', 'node_modules'],
         extensions: ['.ts', '.tsx', '.js'],
 
     },
     devtool: isDev ? 'source-map' : false,
     devServer: {
+
       port: 8080,
+      openPage: 'dashboard/home',
       hot: true,
+      publicPath: "/dashboard",
       open: true,
+      // for BrowserRouter
+      historyApiFallback: {
+        index: '/dashboard',
+      }
     },
     module: {
       rules: [
@@ -79,7 +87,7 @@ module.exports = {
         new CopyPlugin({
           patterns: [
             {
-              from: path.resolve(__dirname, 'src/favicon.ico'),
+              from: path.resolve(__dirname, 'public'),
               to: path.resolve(__dirname, 'build'),
             },
           ],
@@ -97,8 +105,6 @@ module.exports = {
         new webpack.ProvidePlugin({
           process: 'process/browser',
         }),
-    ],
-    performance : {
-      hints : false
-    }
+    ]
+
 }

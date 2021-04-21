@@ -1,6 +1,6 @@
 import { ProfileType, Nullable } from '../../types/types';
 import { InferActionsTypes } from './index';
-import { authActions, TypesAuth } from '../actions/auth';
+import { authActions, TypesAuth } from '../actions';
 
 type InitialStateType = typeof initialState;
 type ActionsType = InferActionsTypes<typeof authActions>;
@@ -10,6 +10,7 @@ const initialState = {
   isAuth: false,
   isTryTime: false,
   isFetching: false,
+  formError: ''
 };
 
 const authReducer = (state = initialState, action: ActionsType): InitialStateType => {
@@ -20,6 +21,10 @@ const authReducer = (state = initialState, action: ActionsType): InitialStateTyp
       return { ...state, isTryTime: action.payload };
     case TypesAuth.IS_FETCHING:
       return { ...state, isFetching: action.payload };
+    case TypesAuth.IS_ERROR:
+      return { ...state, formError: action.payload };
+    case TypesAuth.RESET_ERROR:
+      return { ...state, formError: '' };
     default:
       return state;
   }

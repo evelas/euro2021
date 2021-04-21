@@ -1,75 +1,85 @@
 import React from 'react'
+import { Redirect } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
-import { InjectedFormProps, reduxForm, Field } from 'redux-form';
-import { Input } from '../components/common/formControls/index';
-import { useDispatch } from 'react-redux';
-import { LoginFormValuesType, LoginFormOwnProps } from '../types/types';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { LoginFormValuesType } from '../types/types';
 import { authActions } from '../redux/actions/auth';
+import { Field, Form, Formik, FormikHelpers } from 'formik';
+import { AppStateType } from '../redux/reducers';
 
-
-const LoginForm: React.FC<InjectedFormProps<LoginFormValuesType, LoginFormOwnProps> & LoginFormOwnProps> = (props) => {
-  // console.log('login page', props)
-  return (
-    // eslint-disable-next-line
-    <form className="login__form" onSubmit={props.handleSubmit}>
-      <h3 className="login__title">Вход в систему</h3>
-      <Field
-          className="login__input"
-          name="login"
-          component={Input}
-          type="text"
-          placeholder="Введите логин"
-        />
-
-        <Field
-          className="login__input"
-          name="password"
-          component={Input}
-          type="password"
-          placeholder="Введите пароль"
-        />
-
-      <div className="login__footer">
-        <div className="login__forgot">
-          <Field className="login__checkbox" name="forgotMe" type="checkbox" id="forgotMe" component="input"  />
-          <label className="login__label" htmlFor="forgotMe">Не запоминать</label>
-        </div>
-        {/* eslint-disable-next-line */}
-        <button className="login__button"   >Войти</button>
-      </div>
-    </form>
-  )
-}
-
-const LoginReduxForm = reduxForm<LoginFormValuesType, LoginFormOwnProps>({
-  form: 'login',
-})(LoginForm);
-
+import Timer from '../components/common/Timer';
+import { validateLoginForm } from '../helpers/validators/loginForm';
 
 const Login: React.FC = () => {
 
   const dispatch = useDispatch();
 
-  const postLoginData = (formData: LoginFormValuesType) => {
-    console.log('hi')
+  const {formError, isTryTime, isAuth} = useSelector((state: AppStateType) => state.auth);
+  const initialValues = { login: '', password: '', forgotMe: false } as LoginFormValuesType;
+
+  async function submit (values: LoginFormValuesType, { setSubmitting }: FormikHelpers<LoginFormValuesType>) {
     dispatch(authActions.setLogin(
-      formData.login,
-      formData.password,
-      formData.forgotMe),
+      values.login,
+      values.password,
+      values.forgotMe),
     );
-    console.log('formData-->', formData)
-  };
+    setSubmitting(false);
+  }
+
+  if (isAuth) {
+    return <Redirect to="/dashboard/home" />;
+  }
 
   return (
     <>
       <Header />
       <main className="login">
-        <LoginReduxForm  onSubmit={postLoginData} isDisabled={false} />
+        <Formik
+          initialValues={initialValues}
+          onSubmit={submit}
+          validate={validateLoginForm}
+        >
+          {({
+            isSubmitting,
+            errors,
+            touched
+          }) => (
+            <Form className="login__form">
+              <h3 className="login__title">Вход в систему</h3>
+
+              <Field className="login__input" type="email" name="login" />
+              <div className="login__validate">{errors.login && touched.login && errors.login}</div>
+
+              <Field className="login__input" type="password" name="password" />
+              <div className="login__validate">{errors.password && touched.password && errors.password}</div>
+
+              <div className="login__footer">
+                <div className="login__forgot">
+                  <Field className="login__checkbox" name="forgotMe" type="checkbox" id="forgotMe" />
+                  <label className="login__label" htmlFor="forgotMe">Не запоминать</label>
+                </div>
+
+                <button className="login__button" type="submit" disabled={isSubmitting || isTryTime}>
+                  Войти
+                </button>
+              </div>
+              {formError ? (<div className="login__error">{formError}</div>) : null}
+              {isTryTime && (
+                <Timer
+                  visible={isTryTime}
+                  text={'Время до повторной попытки: '}
+                  type={'login'}
+                />
+              )}
+            </Form>
+          )}
+        </Formik>
       </main>
       <Footer />
     </>
   )
 }
 
-export default Login
+export default Login;

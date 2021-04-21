@@ -1,16 +1,13 @@
 import * as Effects from "redux-saga/effects";
-import { stopSubmit } from 'redux-form';
 import { authActions, TypesAuth } from '../actions/auth';
 import { resultCodeEnum } from '../../enum/resultCode';
 import { ApiTypes } from './../../api/api';
 import { authApi } from '../../api/authApi';
 import { LoginFormValuesType, PayloadType, ProfileType } from './../../types/types';
 
-
 // Login
 async function getLogin(login: string, password: string, forgotMe: boolean) {
   const response = await authApi.login(login, password, forgotMe);
-  console.log('response--> ', response)
   return response.data;
 }
 // 1 параметр генератора StrictEffect
@@ -23,25 +20,32 @@ function* workerGetLogin(action: PayloadType<LoginFormValuesType>): Generator<Ef
       action.payload.password,
       action.payload.forgotMe,
     );
-    console.log('data from login saga2', data)
-    if (data.resultCode === resultCodeEnum.Success) {
-      console.log('data from login saga', data)
-      // запускаем auth Saga
-      yield Effects.put(authActions.loadUserData());
-    } else {
-      if (data.resultCode === resultCodeEnum.ToMuchAttempt) {
-        // слишком много попыток - блокируем кнопку
+    console.log('data from login saga', data);
+    switch(data.resultCode) {
+      case resultCodeEnum.Success:
+        yield Effects.put(authActions.loadUserData());
+        yield Effects.put(authActions.resetError())
+        break;
+      case resultCodeEnum.EmailOrPasswordIsWrong:
+        yield Effects.put(authActions.addError(data.message))
+        break;
+      // case resultCodeEnum.AccountIsNotActivated:
+      //   yield Effects.put(authActions.addError(data.message))
+      //   break;
+      case resultCodeEnum.ToMuchAttempt:
+        yield Effects.put(authActions.resetError())
         yield Effects.put(authActions.setTryTimeButton(true));
-      }
-      if (data.resultCode === resultCodeEnum.AccountIsNotActivated) {
-        // TODO: Аккаунт не активирован
-      }
-      const message = data.message;
-      yield Effects.put(stopSubmit('login', { _error: message }));
+        break;
+      case null:
+        yield Effects.put(authActions.addError('Сервер перегружен. Пожалуйста, подождите 10 минут.'));
+        break;
+      default:
+        return;
     }
+
   } catch (e) {
     const message = 'Сервер перегружен. Пожалуйста, подождите 10 минут.';
-    yield Effects.put(stopSubmit('login', { _error: message }));
+    yield Effects.put(authActions.addError(message))
   }
 }
 
@@ -59,15 +63,17 @@ function* workerGetAuth(): Generator<Effects.StrictEffect, void, never> {
   try {
     const data: ApiTypes<ProfileType> = yield Effects.call(getAuthUserData);
     console.log('data from auth saga', data)
+    yield Effects.put(authActions.toggleIsFetching(true));
     if (data.resultCode === resultCodeEnum.Success) {
-      yield Effects.put(authActions.toggleIsFetching(true));
       yield Effects.put(authActions.setAuthUserData(data.items, true));
-      yield Effects.delay(1500);
-      yield Effects.put(authActions.toggleIsFetching(false));
+    } else if (data.resultCode === resultCodeEnum.NotAuth) {
+      // TODO: переделать редирект с isAuth на history push в saga
     }
   } catch (e) {
     console.error(e);
   }
+  yield Effects.delay(1500);
+  yield Effects.put(authActions.toggleIsFetching(false));
 }
 
 export function* watchGetAuth() {
@@ -85,6 +91,7 @@ function* workerGetLogout(): Generator<Effects.StrictEffect, void, never> {
     const data: ApiTypes = yield Effects.call(getLogout);
     if (data.resultCode === resultCodeEnum.Success) {
       yield Effects.put(authActions.setAuthUserData(null, false));
+
     }
   } catch (e) {
     console.error(e);
@@ -94,3 +101,6 @@ function* workerGetLogout(): Generator<Effects.StrictEffect, void, never> {
 export function* watchGetLogout() {
   yield Effects.takeEvery(TypesAuth.SET_LOGOUT, workerGetLogout);
 }
+
+
+

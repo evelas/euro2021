@@ -1,17 +1,17 @@
 import { combineReducers } from 'redux';
 
-// import { LoginFormValuesType, ServerResponse, ProfileType } from './../../types/types';
-
 import auth from './auth';
-import { reducer as form } from 'redux-form';
+import search from './search'
+import userProfile from './userProfile'
 
 const reducers = combineReducers({
   auth,
-  form
-
+  search,
+  userProfile
 });
 
 type RootReducerType = typeof reducers;
+export type testAuth = ReturnType<typeof auth>;
 export type AppStateType = ReturnType<RootReducerType>;
 
 

@@ -7,7 +7,7 @@
     margin-left: auto;
     margin-right: 12rem;
     position: relative;
-    top: 150px;
+    top: 100px;
     @media (max-width: $desktop) {
       display: flex;
       flex-direction: column;
@@ -39,7 +39,7 @@
     background-color: $white;
 
     padding-left: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
 
     @media (max-width: $tablet) {
       width: 220px;
@@ -121,5 +121,21 @@
     outline: none;
     border-radius: 5px;
     cursor: pointer;
+    &:disabled {
+      opacity: 0.5;
+      cursor: no-drop;
+    }
+  }
+
+  &__error {
+    color: red;
+    position: absolute;
+    bottom: 15px;
+  }
+
+  &__validate {
+    margin-bottom: 15px;
+    height: 15px;
+    color: red
   }
 }

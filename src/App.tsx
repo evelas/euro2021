@@ -1,16 +1,19 @@
 import React from 'react';
-import { Home, Login } from './pages/index';
+import { Home, Login, UserProfile, NotFound } from './pages/index';
 
-import { Route, Switch, withRouter } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
-const App = withRouter(() => {
+const App = () => {
+
   return (
     <Switch>
-      <Route path="/" component={Login} exact />
-      <Route path="/дом" component={Home} />
+      <Route exact path="/dashboard/" component={Login} />
+      <Route path="/dashboard/home" component={Home} />
+      <Route path="/dashboard/user/" component={UserProfile} />
+      <Route path="/dashboard/*" component={NotFound} />
 
     </Switch>
   );
-});
+};
 
 export default App
