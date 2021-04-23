@@ -2,7 +2,7 @@ import { ProfileType, Nullable } from '../../types/types';
 import { InferActionsTypes } from './index';
 import { authActions, TypesAuth } from '../actions';
 
-type InitialStateType = typeof initialState;
+export type InitialStateAuthType = typeof initialState;
 type ActionsType = InferActionsTypes<typeof authActions>;
 
 const initialState = {
@@ -13,7 +13,7 @@ const initialState = {
   formError: ''
 };
 
-const authReducer = (state = initialState, action: ActionsType): InitialStateType => {
+const authReducer = (state = initialState, action: ActionsType): InitialStateAuthType => {
   switch (action.type) {
     case TypesAuth.SET_USER_DATA:
       return { ...state, ...action.payload };

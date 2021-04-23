@@ -72,7 +72,7 @@ function* workerGetAuth(): Generator<Effects.StrictEffect, void, never> {
   } catch (e) {
     console.error(e);
   }
-  yield Effects.delay(1500);
+  yield Effects.delay(1700);
   yield Effects.put(authActions.toggleIsFetching(false));
 }
 

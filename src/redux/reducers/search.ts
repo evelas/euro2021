@@ -3,7 +3,7 @@ import { SearchFullNameType, Nullable } from '../../types/types';
 import { InferActionsTypes } from './index';
 
 
-type InitialStateType = typeof initialState;
+export type InitialStateSearchType = typeof initialState;
 type ActionsType = InferActionsTypes<typeof searchActions>;
 
 const initialState = {
@@ -13,7 +13,7 @@ const initialState = {
   isFetching: false,
 };
 
-const searchReducer = (state = initialState, action: ActionsType): InitialStateType => {
+const searchReducer = (state = initialState, action: ActionsType): InitialStateSearchType => {
   switch (action.type) {
     case TypesSearch.SET_SEARCH:
       return {

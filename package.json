@@ -10,6 +10,9 @@
   "author": "evelas94@gmail.com",
   "license": "ISC",
   "jest": {
+    "verbose": true,
+    "clearMocks": true,
+    "collectCoverage": true,
     "moduleNameMapper": {
       ".+\\.(css|styl|less|sass|scss)$": "identity-obj-proxy",
       ".+\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/__mocks__/fileMock.js"
@@ -17,13 +20,22 @@
     "moduleFileExtensions": [
       "ts",
       "tsx",
-      "js"
+      "js",
+      "jsx",
+      "json",
+      "node"
     ],
     "transform": {
       "^.+\\.(ts|js)x?$": "ts-jest"
     },
     "transformIgnorePatterns": [
       "<rootDir>/node_modules/"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/config/setupTest.ts"
+    ],
+    "snapshotSerializers": [
+      "<rootDir>/node_modules/enzyme-to-json/serializer"
     ]
   },
   "scripts": {
@@ -32,7 +44,9 @@
     "eslint": "npx eslint ./src",
     "editorconfig": "editorconfig-checker",
     "deploy": "npm run build && cd build && rsync --archive --compress --delete . u0249059@31.31.196.2:/var/www/u0249059/data/www/volspb.ru/dashboard/",
-    "test": "jest"
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:math": "jest -i src/redux/reducers/test/auth.spec.ts -t"
   },
   "devDependencies": {
     "@babel/core": "^7.13.16",
@@ -40,6 +54,8 @@
     "@babel/preset-react": "^7.13.13",
     "@babel/preset-typescript": "^7.13.0",
     "@types/classnames": "^2.2.11",
+    "@types/enzyme": "^3.10.8",
+    "@types/enzyme-adapter-react-16": "^1.0.6",
     "@types/history": "^4.7.8",
     "@types/jest": "^26.0.22",
     "@types/lodash": "^4.14.168",
@@ -63,6 +79,9 @@
     "css-hot-loader": "^1.4.4",
     "css-loader": "^5.2.1",
     "editorconfig-checker": "^4.0.2",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.6",
+    "enzyme-to-json": "^3.6.2",
     "eslint": "^7.24.0",
     "eslint-import-resolver-typescript": "^2.4.0",
     "eslint-plugin-import": "^2.22.1",

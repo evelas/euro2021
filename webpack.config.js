@@ -23,9 +23,6 @@ const jsLoaders = () => {
 };
 
 module.exports = {
-    // entry: {
-    //     app: path.join(__dirname, 'src', 'index.tsx')
-    // },
     context: path.resolve(__dirname, 'src'),
     entry: ['@babel/polyfill', './index.tsx'],
     output: {
