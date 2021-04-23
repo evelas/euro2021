@@ -46,7 +46,7 @@
     "deploy": "npm run build && cd build && rsync --archive --compress --delete . u0249059@31.31.196.2:/var/www/u0249059/data/www/volspb.ru/dashboard/",
     "test": "jest",
     "test:watch": "jest --watch",
-    "test:math": "jest -i src/redux/reducers/test/auth.spec.ts -t"
+    "test:math": "jest -i src/components/test/footer.spec.tsx -t"
   },
   "devDependencies": {
     "@babel/core": "^7.13.16",
