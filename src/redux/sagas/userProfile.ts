@@ -11,9 +11,10 @@ async function getUserProfile(id: number) {
 }
 
 function* workerGetUserProfile(action: ActionType<string, number>): Generator<Effects.StrictEffect, void, never> {
+
   try {
-    const data: ApiTypes<UserProfileType> = yield Effects.call(getUserProfile, action.payload);
     yield Effects.put(userProfileActions.toggleIsFetching(true));
+    const data: ApiTypes<UserProfileType> = yield Effects.call(getUserProfile, action.payload);
     switch (data.resultCode) {
       case resultCodeEnum.Success:
         yield Effects.put(userProfileActions.setUser(data.items));
@@ -21,6 +22,7 @@ function* workerGetUserProfile(action: ActionType<string, number>): Generator<Ef
         yield Effects.put(userProfileActions.toggleIsFetching(false));
         break;
       case resultCodeEnum.NotFound:
+        yield Effects.put(userProfileActions.setUser(null));
         yield Effects.put(userProfileActions.notFoundUser(data.message));
         yield Effects.delay(1700);
         yield Effects.put(userProfileActions.toggleIsFetching(false));
@@ -45,13 +47,15 @@ async function editProfile(formData: UserProfileType, userId: number) {
 }
 
 function* workerEditProfile(action: ActionType<string, ActionSaveEditType>): Generator<Effects.StrictEffect, void, never> {
+
   try {
+    yield Effects.put(userProfileActions.toggleIsFetching(true));
     const data: ApiTypes = yield Effects.call(
       editProfile,
       action.payload.formData,
       action.payload.userId
     );
-    yield Effects.put(userProfileActions.toggleIsFetching(true));
+
     yield Effects.delay(1700);
     // TODO: профиль сохранен UI
     yield Effects.put(userProfileActions.toggleIsFetching(false));

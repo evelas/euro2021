@@ -35,9 +35,9 @@ const UserProfile: React.FC = () => {
       <main className="profile">
           {
             userData ?
-              (!isFetching ? <UserDataHeader {...userData}/> : <Preloader/>)
+              (!isFetching ? <UserDataHeader {...userData}/> : <Preloader fullPage={true} />)
                 :
-              (notFound ? (!isFetching ? <div className="profile__notfound">{notFound}</div> : <Preloader/>) : null)
+              (notFound ? (!isFetching ? <div className="profile__notfound">{notFound}</div> : <Preloader fullPage={true} />) : null)
           }
       </main>
     </>

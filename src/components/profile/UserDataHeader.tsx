@@ -5,9 +5,10 @@ import { userProfileActions } from '../../redux/actions';
 import { useDispatch } from 'react-redux';
 
 export const UserDataHeader: React.FC<UserProfileType> = React.memo((props: UserProfileType) => {
+  console.log('render');
   const dispatch = useDispatch();
 
-  async function submit (values: UserProfileType, { setSubmitting }: FormikHelpers<UserProfileType>) {
+  function submit (values: UserProfileType, { setSubmitting }: FormikHelpers<UserProfileType>) {
     console.log('component dispatch:', values)
     console.log(parseInt(props.userId))
     dispatch(userProfileActions.saveProfile(values, parseInt(props.userId)));

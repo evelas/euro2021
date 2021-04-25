@@ -15,8 +15,8 @@ async function getSearch(textSearch: string) {
 
 export function* workerGetSearch(action: ActionType<string, string>): Generator<Effects.StrictEffect, void, never> {
   try {
-    const data: ApiTypes<Array<SearchFullNameType>> = yield Effects.call(getSearch, action.payload);
     yield Effects.put(searchActions.toggleIsFetching(true));
+    const data: ApiTypes<Array<SearchFullNameType>> = yield Effects.call(getSearch, action.payload);
     switch(data.resultCode) {
       case resultCodeEnum.Success:
         yield Effects.put(searchActions.setSearchAnswer(data.items));

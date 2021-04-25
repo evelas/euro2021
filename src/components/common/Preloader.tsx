@@ -1,9 +1,18 @@
+import classNames from 'classnames';
 import React from 'react'
 import preloader from '../../assets/img/preloader.gif';
 
-const Preloader: React.FC = () => {
+interface PropsType {
+  fullPage?: boolean;
+}
+
+
+const Preloader: React.FC<PropsType> = ({fullPage = false}: PropsType) => {
+  console.log(fullPage)
   return (
-    <div className="preloader">
+    <div className={classNames('preloader', {
+      preloader_max: fullPage === true
+    })}>
       <img src={preloader} width="50px" alt="preloader"/>
     </div>
   )
