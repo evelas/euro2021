@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router';
 import Preloader from '../../components/common/Preloader';
 import ContainerMenu from '../../components/menu/ContainerMenu';
-
 import UserDataHeader from '../../components/profile/UserDataHeader';
 import { authActions, userProfileActions } from '../../redux/actions';
 import { AppStateType } from '../../redux/reducers';

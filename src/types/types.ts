@@ -43,8 +43,10 @@ export type LoginFormOwnProps = {
   isDisabled: boolean;
 }
 
-export type PayloadType<T> = {
-  payload: T;
+
+export type ActionType<T, S> = {
+  type: T;
+  payload: S
 }
 
 export type SearchFullNameType = {

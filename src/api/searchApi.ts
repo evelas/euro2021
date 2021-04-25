@@ -3,7 +3,7 @@ import { SearchFullNameType, UserProfileType } from '../types/types';
 
 export const searchApi = {
   getSearch(text: string) {
-    return instansAxios.get<ApiTypes<SearchFullNameType>>(`search?text=${text}`);
+    return instansAxios.get<ApiTypes<Array<SearchFullNameType>>>(`search?text=${text}`);
   },
   getOneUser(id: number) {
     return instansAxios.get<ApiTypes>(`profile/${id}`);

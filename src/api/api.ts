@@ -9,9 +9,8 @@ export const instansAxios = Axios.create({
 });
 
 // ответ от сервера
-// eslint-disable-next-line
-export type ApiTypes<D = {}, RC = resultCodeEnum> = {
+export type ApiTypes<D = [], RC = resultCodeEnum> = {
   resultCode: RC;
-  items: D;
+  items?: D;
   message: string;
 }

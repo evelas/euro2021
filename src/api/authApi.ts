@@ -14,4 +14,3 @@ export const authApi = {
   },
 };
 
-// authAPI.getAuthData().then(res => res.data);
