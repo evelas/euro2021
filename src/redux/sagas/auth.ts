@@ -3,7 +3,7 @@ import { authActions, TypesAuth } from '../actions/auth';
 import { resultCodeEnum } from '../../enum/resultCode';
 import { ApiTypes } from './../../api/api';
 import { authApi } from '../../api/authApi';
-import { LoginFormValuesType, PayloadType, ProfileType } from './../../types/types';
+import { LoginFormValuesType, ProfileType, ActionType } from './../../types/types';
 
 // Login
 async function getLogin(login: string, password: string, forgotMe: boolean) {
@@ -12,7 +12,7 @@ async function getLogin(login: string, password: string, forgotMe: boolean) {
 }
 // 1 параметр генератора StrictEffect
 // Интерфейс с any payload / type
-function* workerGetLogin(action: PayloadType<LoginFormValuesType>): Generator<Effects.StrictEffect, void, never> {
+function* workerGetLogin(action: ActionType<string, LoginFormValuesType>): Generator<Effects.StrictEffect, void, never> {
   try {
     const data: ApiTypes = yield Effects.call(
       getLogin,
@@ -67,13 +67,14 @@ function* workerGetAuth(): Generator<Effects.StrictEffect, void, never> {
     if (data.resultCode === resultCodeEnum.Success) {
       yield Effects.put(authActions.setAuthUserData(data.items, true));
     } else if (data.resultCode === resultCodeEnum.NotAuth) {
-      // TODO: переделать редирект с isAuth на history push в saga
+      yield Effects.put(authActions.setAuthUserData(null, false));
     }
+    yield Effects.delay(1700);
+    yield Effects.put(authActions.toggleIsFetching(false));
   } catch (e) {
     console.error(e);
   }
-  yield Effects.delay(1500);
-  yield Effects.put(authActions.toggleIsFetching(false));
+
 }
 
 export function* watchGetAuth() {
@@ -86,7 +87,7 @@ async function getLogout() {
   return response.data;
 }
 
-function* workerGetLogout(): Generator<Effects.StrictEffect, void, never> {
+export function* workerGetLogout(): Generator<Effects.StrictEffect, void, never> {
   try {
     const data: ApiTypes = yield Effects.call(getLogout);
     if (data.resultCode === resultCodeEnum.Success) {

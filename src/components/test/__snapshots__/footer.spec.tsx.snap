@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer component should render Footer component 1`] = `
+<footer
+  class="footer"
+>
+  <img
+    alt="footer"
+    height="100%"
+    src="test-file-stub"
+    width="100%"
+  />
+</footer>
+`;

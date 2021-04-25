@@ -2,7 +2,7 @@ import { InferActionsTypes } from '.';
 import { Nullable, UserProfileType } from '../../types/types';
 import { userProfileActions, TypesUserProfile } from '../actions';
 
-type InitialStateType = typeof initialState;
+export type InitialStateUserProfileType = typeof initialState;
 type ActionsType = InferActionsTypes<typeof userProfileActions>;
 
 const initialState = {
@@ -11,7 +11,7 @@ const initialState = {
   notFound: ''
 };
 
-const oneUserReducer = (state = initialState, action: ActionsType): InitialStateType => {
+const oneUserReducer = (state = initialState, action: ActionsType): InitialStateUserProfileType => {
   switch (action.type) {
     case TypesUserProfile.SET_USER:
       return {

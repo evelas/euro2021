@@ -10,7 +10,7 @@ import Preloader from '../../components/common/Preloader';
 import { useHistory, Redirect } from 'react-router';
 import { authActions } from '../../redux/actions';
 import * as queryString from 'query-string';
-import Menu from '../../components/menu/Menu';
+import ContainerMenu from '../../components/menu/ContainerMenu';
 
 const Home: React.FC = () => {
   const dispatch = useDispatch();
@@ -57,9 +57,8 @@ const Home: React.FC = () => {
   return (
     <>
       <Header />
-      <Menu />
+      <ContainerMenu />
       <main className="home">
-
         <h4 className="home__title">Поиск по системе</h4>
         <Formik initialValues={{ search: '' }} onSubmit={submit} innerRef={formikRef} className="home__form">
         {() => (
@@ -69,7 +68,6 @@ const Home: React.FC = () => {
             </Form>
           )}
         </Formik>
-
         <span className="home__col">ID</span>
         <span className="home__col">ФИО</span>
         <hr></hr>

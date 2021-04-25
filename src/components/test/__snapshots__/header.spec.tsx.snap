@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header component should render Header component 1`] = `
+<header
+  class="header"
+>
+  <h1
+    class="header__title"
+  >
+    UEFA EURO 2020
+  </h1>
+  <h2
+    class="header__about"
+  >
+    Система управления данными
+  </h2>
+</header>
+`;

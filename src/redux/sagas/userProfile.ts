@@ -2,7 +2,7 @@ import * as Effects from "redux-saga/effects";
 import { userProfileActions, TypesUserProfile } from '../actions';
 import { ApiTypes } from "../../api/api";
 import { searchApi } from '../../api/searchApi';
-import { UserProfileType, PayloadType, ActionSaveEditType } from './../../types/types';
+import { UserProfileType, ActionSaveEditType, ActionType } from './../../types/types';
 import { resultCodeEnum } from "../../enum/resultCode";
 
 async function getUserProfile(id: number) {
@@ -10,7 +10,7 @@ async function getUserProfile(id: number) {
   return response.data;
 }
 
-function* workerGetUserProfile(action: PayloadType<number>): Generator<Effects.StrictEffect, void, never> {
+function* workerGetUserProfile(action: ActionType<string, number>): Generator<Effects.StrictEffect, void, never> {
   try {
     const data: ApiTypes<UserProfileType> = yield Effects.call(getUserProfile, action.payload);
     yield Effects.put(userProfileActions.toggleIsFetching(true));
@@ -44,7 +44,7 @@ async function editProfile(formData: UserProfileType, userId: number) {
   return response.data;
 }
 
-function* workerEditProfile(action: PayloadType<ActionSaveEditType>): Generator<Effects.StrictEffect, void, never> {
+function* workerEditProfile(action: ActionType<string, ActionSaveEditType>): Generator<Effects.StrictEffect, void, never> {
   try {
     const data: ApiTypes = yield Effects.call(
       editProfile,

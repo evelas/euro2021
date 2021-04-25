@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Menu component should render Menu component 1`] = `
+<div
+  class="menu"
+>
+  <a
+    class="menu__link"
+    href="/dashboard/home"
+  >
+    <div
+      class="menu__button menu__search"
+    >
+      Поиск в системе
+    </div>
+  </a>
+  <a
+    class="menu__link"
+    href="/cms/excel3"
+    target="_blank"
+  >
+    <div
+      class="menu__button menu__cloud"
+    >
+      Выгрузка
+    </div>
+  </a>
+  <a
+    class="menu__link"
+    href="/dashboard/recruit"
+  >
+    <div
+      class="menu__button menu__recruit"
+    >
+      Рекрутинг
+    </div>
+  </a>
+  <a
+    class="menu__link"
+  >
+    <div
+      class="menu__button"
+    >
+      Выйти
+    </div>
+  </a>
+</div>
+`;

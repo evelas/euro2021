@@ -2,7 +2,7 @@ import { all } from 'redux-saga/effects';
 
 
 import { watchGetLogin, watchGetAuth, watchGetLogout } from './auth';
-import { watchSearchProducts } from './search';
+import { watchSearchAnswers } from './search';
 import { watchUserProfile, watchEditProfile } from './userProfile';
 
 export default function* rootSaga() {
@@ -10,7 +10,7 @@ export default function* rootSaga() {
     watchGetAuth(),
     watchGetLogin(),
     watchGetLogout(),
-    watchSearchProducts(),
+    watchSearchAnswers(),
     watchUserProfile(),
     watchEditProfile()
     // watchInitialize(),

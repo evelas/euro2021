@@ -3,8 +3,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useHistory } from 'react-router';
 import Preloader from '../../components/common/Preloader';
-import Menu from '../../components/menu/Menu';
-
+import ContainerMenu from '../../components/menu/ContainerMenu';
 import UserDataHeader from '../../components/profile/UserDataHeader';
 import { authActions, userProfileActions } from '../../redux/actions';
 import { AppStateType } from '../../redux/reducers';
@@ -32,7 +31,7 @@ const UserProfile: React.FC = () => {
   }
   return (
     <>
-      <Menu/>
+      <ContainerMenu />
       <main className="profile">
           {
             userData ?
