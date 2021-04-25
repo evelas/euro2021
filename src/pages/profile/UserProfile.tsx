@@ -1,7 +1,7 @@
 
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, useHistory } from 'react-router';
+import { useHistory } from 'react-router';
 import Preloader from '../../components/common/Preloader';
 import ContainerMenu from '../../components/menu/ContainerMenu';
 import UserDataHeader from '../../components/profile/UserDataHeader';
@@ -11,7 +11,6 @@ import { AppStateType } from '../../redux/reducers';
 
 const UserProfile: React.FC = () => {
   const dispatch = useDispatch();
-  const { isAuth } = useSelector((state: AppStateType) => state.auth);
   const {userData, isFetching, notFound} = useSelector((state: AppStateType) => state.userProfile);
   const history = useHistory();
   const { pathname } = history.location;
@@ -26,9 +25,6 @@ const UserProfile: React.FC = () => {
     dispatch(authActions.loadUserData());
   }, []);
 
-  if(!isAuth) {
-    return <Redirect to="/dashboard/"/>
-  }
   return (
     <>
       <ContainerMenu />

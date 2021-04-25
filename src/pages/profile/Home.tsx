@@ -7,7 +7,7 @@ import Header from '../../components/Header';
 import { searchActions } from '../../redux/actions/search';
 import { AppStateType } from '../../redux/reducers';
 import Preloader from '../../components/common/Preloader';
-import { useHistory, Redirect } from 'react-router';
+import { useHistory } from 'react-router';
 import { authActions } from '../../redux/actions';
 import * as queryString from 'query-string';
 import ContainerMenu from '../../components/menu/ContainerMenu';
@@ -19,7 +19,6 @@ const Home: React.FC = () => {
   const formikRef = React.useRef(null);
 
   const { searchAnswer, notFound, isFetching } = useSelector((state: AppStateType) => state.search);
-  const { isAuth } = useSelector((state: AppStateType) => state.auth);
 
   // если изменился query search
   React.useEffect(() => {
@@ -51,9 +50,6 @@ const Home: React.FC = () => {
     dispatch(authActions.loadUserData());
   }, []);
 
-  if(!isAuth) {
-    return <Redirect to="/dashboard/"/>
-  }
   return (
     <>
       <Header />

@@ -1,5 +1,4 @@
 import React from 'react'
-import { Redirect } from 'react-router-dom';
 import Footer from '../components/Footer';
 import Header from '../components/Header';
 import { useDispatch, useSelector } from 'react-redux';
@@ -12,7 +11,7 @@ import LoginForm from '../components/LoginForm';
 const Login: React.FC = () => {
 
   const dispatch = useDispatch();
-  const {formError, isTryTime, isAuth} = useSelector((state: AppStateType) => state.auth);
+  const {formError, isTryTime} = useSelector((state: AppStateType) => state.auth);
 
   const submit = (values: LoginFormValuesType) => {
     dispatch(authActions.setLogin(
@@ -20,10 +19,6 @@ const Login: React.FC = () => {
       values.password,
       values.forgotMe),
     );
-  }
-
-  if (isAuth) {
-    return <Redirect to="/dashboard/home" />;
   }
 
   return (
