@@ -11,7 +11,6 @@ async function getUserProfile(id: string) {
 }
 
 export function* workerGetUserProfile(action: ActionType<string, string>): Generator<Effects.StrictEffect, void, never> {
-
   try {
     yield Effects.put(userProfileActions.toggleIsFetching(true));
     const data: ApiTypes<UserProfileType> = yield Effects.call(getUserProfile, action.payload);
@@ -30,7 +29,6 @@ export function* workerGetUserProfile(action: ActionType<string, string>): Gener
       default:
         break
     }
-
   } catch (e) {
     console.log(e);
   }
@@ -47,7 +45,6 @@ async function editProfile(formData: UserProfileType, userId: number) {
 }
 
 function* workerEditProfile(action: ActionType<string, ActionSaveEditType>): Generator<Effects.StrictEffect, void, never> {
-
   try {
     yield Effects.put(userProfileActions.toggleIsFetching(true));
     const data: ApiTypes = yield Effects.call(
@@ -65,6 +62,7 @@ function* workerEditProfile(action: ActionType<string, ActionSaveEditType>): Gen
     console.log(e);
   }
 }
+
 export function* watchEditProfile() {
   yield Effects.takeEvery(TypesUserProfile.SAVE_PROFILE as string, workerEditProfile);
 }

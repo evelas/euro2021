@@ -44,7 +44,6 @@ function* workerGetLogin(action: ActionType<string, LoginFormValuesType>): Gener
       default:
         return;
     }
-
   } catch (e) {
     yield Effects.put(authActions.addError('Сервер перегружен. Пожалуйста, подождите 10 минут.'))
   }
@@ -104,6 +103,3 @@ export function* workerGetLogout(): Generator<Effects.StrictEffect, void, never>
 export function* watchGetLogout() {
   yield Effects.takeEvery(TypesAuth.SET_LOGOUT, workerGetLogout);
 }
-
-
-

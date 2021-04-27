@@ -2,10 +2,8 @@ import { searchApi } from './../../api/searchApi';
 import * as Effects from "redux-saga/effects";
 import { searchActions, TypesSearch } from '../actions/search';
 import { ApiTypes } from "../../api/api";
-
 import { SearchFullNameType, ActionType } from './../../types/types';
 import { resultCodeEnum } from '../../enum/resultCode';
-
 
 // Поиск пользователя по фамилии или логину
 async function getSearch(textSearch: string) {
