@@ -38,5 +38,5 @@ export function* workerGetSearch(action: ActionType<string, string>): Generator<
 }
 
 export function* watchSearchAnswers() {
-  yield Effects.takeEvery(TypesSearch.LOAD_SEARCH as never, workerGetSearch);
+  yield Effects.takeEvery(TypesSearch.LOAD_SEARCH as string, workerGetSearch);
 }

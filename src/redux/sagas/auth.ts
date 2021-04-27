@@ -51,7 +51,7 @@ function* workerGetLogin(action: ActionType<string, LoginFormValuesType>): Gener
 }
 
 export function* watchGetLogin() {
-  yield Effects.takeEvery(TypesAuth.SET_LOGIN as never, workerGetLogin);
+  yield Effects.takeEvery(TypesAuth.SET_LOGIN as string, workerGetLogin);
 }
 
 // Auth

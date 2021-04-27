@@ -5,12 +5,12 @@ import { searchApi } from '../../api/searchApi';
 import { UserProfileType, ActionSaveEditType, ActionType } from './../../types/types';
 import { resultCodeEnum } from "../../enum/resultCode";
 
-async function getUserProfile(id: number) {
+async function getUserProfile(id: string) {
   const response = await searchApi.getOneUser(id);
   return response.data;
 }
 
-function* workerGetUserProfile(action: ActionType<string, number>): Generator<Effects.StrictEffect, void, never> {
+export function* workerGetUserProfile(action: ActionType<string, string>): Generator<Effects.StrictEffect, void, never> {
 
   try {
     yield Effects.put(userProfileActions.toggleIsFetching(true));
@@ -37,7 +37,7 @@ function* workerGetUserProfile(action: ActionType<string, number>): Generator<Ef
 }
 
 export function* watchUserProfile() {
-  yield Effects.takeEvery(TypesUserProfile.LOAD_USER as never, workerGetUserProfile);
+  yield Effects.takeEvery(TypesUserProfile.LOAD_USER as string, workerGetUserProfile);
 }
 
 // Сохранение профиля
@@ -66,5 +66,5 @@ function* workerEditProfile(action: ActionType<string, ActionSaveEditType>): Gen
   }
 }
 export function* watchEditProfile() {
-  yield Effects.takeEvery(TypesUserProfile.SAVE_PROFILE as never, workerEditProfile);
+  yield Effects.takeEvery(TypesUserProfile.SAVE_PROFILE as string, workerEditProfile);
 }

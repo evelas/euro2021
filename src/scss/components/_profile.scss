@@ -85,6 +85,9 @@
     &_green {
       background-color: #139413;
     }
+    &:disabled {
+      opacity: 0.6;
+    }
   }
   &__btns {
     display: flex;

@@ -38,7 +38,7 @@ export const UserDataHeader: React.FC<UserProfileType> = React.memo((props: User
                             <a className="profile__button profile_mr15" href={"/userimg/avatars/" + props.email + ".jpg"} target="_blank" rel="noreferrer">
                               <span>Открыть</span>
                             </a>
-                            <button className="profile__button profile_mr15">Загрузить</button>
+                            <button className="profile__button profile_mr15" disabled>Загрузить</button>
                           </div>
                         </div>
 
@@ -77,19 +77,19 @@ export const UserDataHeader: React.FC<UserProfileType> = React.memo((props: User
                         <div className="profile__btns">
                           <span className="profile__text profile_mr15">Скан паспорта:</span>
                           <div>
-                            <a className="profile__button profile_mr15" href={"/userimg/scanpassport/" + props.email + ".jpg"} target="_blank" rel="noreferrer">
+                            <a className="profile__button profile_mr15" href={"/userimg/avatars/" + props.email + ".jpg"} target="_blank" rel="noreferrer">
                               <span>Открыть</span>
                             </a>
-                            <button className="profile__button profile_mr15">Загрузить</button>
+                            <button className="profile__button profile_mr15" disabled>Загрузить</button>
                           </div>
                         </div>
                         <div className="profile__btns">
                           <span className="profile__text profile_mr15">Скан Полиса:</span>
                           <div>
-                            <a className="profile__button profile_mr15" href={"/userimg/scanmedicine/" + props.email + ".jpg"} target="_blank" rel="noreferrer">
+                            <a className="profile__button profile_mr15" href={"/userimg/avatars/" + props.email + ".jpg"} target="_blank" rel="noreferrer">
                               <span>Открыть</span>
                             </a>
-                            <span className="profile__button profile_mr15">Загрузить</span>
+                            <button className="profile__button profile_mr15" disabled>Загрузить</button>
                           </div>
                         </div>
                       </div>
@@ -100,7 +100,7 @@ export const UserDataHeader: React.FC<UserProfileType> = React.memo((props: User
                             <a className="profile__button profile_mr15" href={"/userimg/scananket/" + props.email + ".jpg"} target="_blank" rel="noreferrer">
                               <span>Открыть</span>
                             </a>
-                            <button className="profile__button profile_mr15">Загрузить</button>
+                            <button className="profile__button profile_mr15" disabled>Загрузить</button>
                           </div>
                         </div>
                       </div>
