@@ -7,11 +7,9 @@ import { History } from 'history';
 
 // eslint-disable-next-line
 export const searchLogic = (formikRef: React.MutableRefObject<FormikProps<SearchFormik>>, search: string, dispatch: React.Dispatch<any>) => {
-  dispatch(searchActions.setSearchAnswer(null));
   const parsed = queryString.parse(search)
   if (parsed.search) {
     dispatch(searchActions.loadSearch(parsed.search));
-    dispatch(searchActions.setSearchText(parsed.search))
     formikRef.current.values.search = parsed.search;
   }
 }

@@ -22,9 +22,8 @@ export const userProfileActions = {
     type: TypesUserProfile.NOT_FOUND_USER,
     payload: text
   }),
-  toggleIsFetching: (isFetching: boolean) => ({
+  toggleIsFetching: () => ({
     type: TypesUserProfile.IS_FETCHING,
-    payload: isFetching,
   }),
   saveProfile: (formData: UserProfileType, userId: number) => ({
     type: TypesUserProfile.SAVE_PROFILE,

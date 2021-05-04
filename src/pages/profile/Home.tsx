@@ -13,6 +13,7 @@ import { SearchFormik } from '../../types/types';
 import { searchLogic, searchSubmit } from '../../helpers/search/searchLogic';
 
 const Home: React.FC = () => {
+
   const dispatch = useDispatch();
   const history = useHistory();
   const {search} = history.location;

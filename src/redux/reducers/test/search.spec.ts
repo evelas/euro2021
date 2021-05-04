@@ -21,15 +21,9 @@ describe("should correct search logic work", () => {
                   id: 3, fullName: 'Nick 3'
               },
           ],
-          searchText: '600',
           notFound: '',
           isFetching: false,
       }
-  })
-
-  test('set search text', () => {
-      const newState = searchReducer(state, searchActions.setSearchText('600'))
-      expect(newState.searchText).toBe('600');
   })
 
   test('set search answer', () => {

@@ -7,7 +7,7 @@ describe("should correct userProfile logic work", () => {
   beforeEach(() => {
       state = {
           userData: null,
-          isFetching: false,
+          isFetching: true,
           notFound: '',
           isSaved: false
       }
@@ -24,8 +24,8 @@ describe("should correct userProfile logic work", () => {
   })
 
   test('isFetching', () => {
-    const newState = oneUserReducer(state, userProfileActions.toggleIsFetching(true));
-    expect(newState.isFetching).toBeTruthy();
+    const newState = oneUserReducer(state, userProfileActions.toggleIsFetching());
+    expect(newState.isFetching).toBeFalsy();
   })
 
   test('default state', () => {

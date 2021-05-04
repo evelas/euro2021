@@ -63,7 +63,6 @@ function* workerGetAuth(): Generator<Effects.StrictEffect, void, never> {
   try {
     yield Effects.put(authActions.toggleIsFetching(true));
     const data: ApiTypes<ProfileType> = yield Effects.call(getAuthUserData);
-    console.log('data from auth saga', data)
     switch(data.resultCode) {
       case resultCodeEnum.Success:
         yield Effects.put(authActions.setAuthUserData(data.items));

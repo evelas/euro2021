@@ -8,11 +8,9 @@ import { AppStateType } from '../../redux/reducers';
 export const UserDataHeader: React.FC<UserProfileType> = (props: UserProfileType) => {
 
   const dispatch = useDispatch();
-
   const { isSaved } = useSelector((state: AppStateType) => state.userProfile);
 
   function submit (values: UserProfileType) {
-    console.log('component dispatch:', values)
     dispatch(userProfileActions.saveProfile(values, parseInt(props.userId)));
   }
 

@@ -8,7 +8,6 @@ type ActionsType = InferActionsTypes<typeof searchActions>;
 
 const initialState = {
   searchAnswer: null as Nullable<Array<SearchType>>,
-  searchText: '' as string | string[],
   notFound: '',
   isFetching: false,
 };
@@ -29,11 +28,6 @@ const searchReducer = (state = initialState, action: ActionsType): InitialStateS
       return {
         ...state,
         notFound: action.payload,
-      };
-    case TypesSearch.TEXT_SEARCH_SAVE:
-      return {
-        ...state,
-        searchText: action.payload,
       };
     default:
       return state;

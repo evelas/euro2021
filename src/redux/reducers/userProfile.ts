@@ -7,7 +7,7 @@ type ActionsType = InferActionsTypes<typeof userProfileActions>;
 
 const initialState = {
   userData: null as Nullable<UserProfileType>,
-  isFetching: false,
+  isFetching: true,
   notFound: '',
   isSaved: false
 };
@@ -22,7 +22,7 @@ const oneUserReducer = (state = initialState, action: ActionsType): InitialState
     case TypesUserProfile.IS_FETCHING:
       return {
         ...state,
-        isFetching: action.payload,
+        isFetching: false,
       };
     case TypesUserProfile.NOT_FOUND_USER:
       return {

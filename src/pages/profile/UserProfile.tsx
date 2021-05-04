@@ -10,6 +10,7 @@ import { AppStateType } from '../../redux/reducers';
 
 
 const UserProfile: React.FC = () => {
+
   const dispatch = useDispatch();
   const {userData, isFetching, notFound} = useSelector((state: AppStateType) => state.userProfile);
   const history = useHistory();

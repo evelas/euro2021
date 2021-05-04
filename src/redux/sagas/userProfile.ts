@@ -12,23 +12,21 @@ async function getUserProfile(id: string) {
 
 export function* workerGetUserProfile(action: ActionType<string, string>): Generator<Effects.StrictEffect, void, never> {
   try {
-    yield Effects.put(userProfileActions.toggleIsFetching(true));
     const data: ApiTypes<UserProfileType> = yield Effects.call(getUserProfile, action.payload);
     switch (data.resultCode) {
       case resultCodeEnum.Success:
         yield Effects.put(userProfileActions.setUser(data.items));
-        yield Effects.delay(1700);
-        yield Effects.put(userProfileActions.toggleIsFetching(false));
         break;
       case resultCodeEnum.NotFound:
         yield Effects.put(userProfileActions.setUser(null));
         yield Effects.put(userProfileActions.notFoundUser(data.message));
-        yield Effects.delay(1700);
-        yield Effects.put(userProfileActions.toggleIsFetching(false));
         break;
     }
   } catch (e) {
     console.log(e);
+  } finally {
+    yield Effects.delay(1700);
+    yield Effects.put(userProfileActions.toggleIsFetching());
   }
 }
 

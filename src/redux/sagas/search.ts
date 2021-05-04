@@ -15,7 +15,6 @@ export function* workerGetSearch(action: ActionType<string, string>): Generator<
   try {
     yield Effects.put(searchActions.toggleIsFetching(true));
     const data: ApiTypes<Array<SearchType>> = yield Effects.call(getSearch, action.payload);
-    console.log("search saga", data)
     switch(data.resultCode) {
       case resultCodeEnum.Success:
         yield Effects.put(searchActions.notFoundAny(''));
