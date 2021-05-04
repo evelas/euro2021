@@ -66,10 +66,10 @@ function* workerGetAuth(): Generator<Effects.StrictEffect, void, never> {
     console.log('data from auth saga', data)
     switch(data.resultCode) {
       case resultCodeEnum.Success:
-        yield Effects.put(authActions.setAuthUserData(data.items, true));
+        yield Effects.put(authActions.setAuthUserData(data.items));
         break;
       case resultCodeEnum.NotAuth:
-        yield Effects.put(authActions.setAuthUserData(null, false));
+        yield Effects.put(authActions.setAuthUserData(null));
         history.push('/dashboard/');
         break;
     }
@@ -95,7 +95,7 @@ export function* workerGetLogout(): Generator<Effects.StrictEffect, void, never>
   try {
     const data: ApiTypes = yield Effects.call(getLogout);
     if (data.resultCode === resultCodeEnum.Success) {
-      yield Effects.put(authActions.setAuthUserData(null, false));
+      yield Effects.put(authActions.setAuthUserData(null));
       history.push('/dashboard/');
     }
   } catch (e) {

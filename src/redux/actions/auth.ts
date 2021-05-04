@@ -16,11 +16,10 @@ export const TypesAuth = {
 };
 
 export const authActions = {
-  setAuthUserData: (profile: ProfileType | null, isAuth: boolean) => ({
+  setAuthUserData: (profile: ProfileType | null) => ({
     type: TypesAuth.SET_USER_DATA,
     payload: {
-      profile,
-      isAuth,
+      profile
     },
   }),
   loadUserData: () => ({

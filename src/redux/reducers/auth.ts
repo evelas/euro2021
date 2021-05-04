@@ -7,7 +7,6 @@ type ActionsType = InferActionsTypes<typeof authActions>;
 
 const initialState = {
   profile: null as Nullable<ProfileType>,
-  isAuth: false,
   isTryTime: false,
   isFetching: false,
   formError: ''

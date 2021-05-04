@@ -8,16 +8,14 @@ describe("should correct auth logic work", () => {
       state = {
           profile: null,
           isFetching: false,
-          isAuth: false,
           isTryTime: false,
           formError: ''
       }
   })
 
   test('set profile information', () => {
-      const newState = authReducer(state, authActions.setAuthUserData({id: 0, email: 'evelas94@gmail.com'}, true));
+      const newState = authReducer(state, authActions.setAuthUserData({id: 0, email: 'evelas94@gmail.com'}));
       expect(newState.profile).toStrictEqual({id: 0, email: 'evelas94@gmail.com'});
-      expect(newState.isAuth).toBeTruthy();
   })
 
   test('set isTryTime', () => {
