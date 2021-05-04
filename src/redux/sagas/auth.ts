@@ -4,12 +4,14 @@ import { resultCodeEnum } from '../../enum/resultCode';
 import { ApiTypes } from './../../api/api';
 import { authApi } from '../../api/authApi';
 import { LoginFormValuesType, ProfileType, ActionType } from './../../types/types';
+import history from "../../helpers/history";
 
 // Login
 async function getLogin(login: string, password: string, forgotMe: boolean) {
   const response = await authApi.login(login, password, forgotMe);
   return response.data;
 }
+
 // 1 параметр генератора StrictEffect
 // Интерфейс с any payload / type
 function* workerGetLogin(action: ActionType<string, LoginFormValuesType>): Generator<Effects.StrictEffect, void, never> {
@@ -20,11 +22,11 @@ function* workerGetLogin(action: ActionType<string, LoginFormValuesType>): Gener
       action.payload.password,
       action.payload.forgotMe,
     );
-    console.log('data from login saga', data);
     switch(data.resultCode) {
       case resultCodeEnum.Success:
         yield Effects.put(authActions.loadUserData());
         yield Effects.put(authActions.resetError())
+        history.push('/dashboard/home');
         break;
       case resultCodeEnum.EmailOrPasswordIsWrong:
         yield Effects.put(authActions.addError(data.message))
@@ -42,15 +44,13 @@ function* workerGetLogin(action: ActionType<string, LoginFormValuesType>): Gener
       default:
         return;
     }
-
   } catch (e) {
-    const message = 'Сервер перегружен. Пожалуйста, подождите 10 минут.';
-    yield Effects.put(authActions.addError(message))
+    yield Effects.put(authActions.addError('Сервер перегружен. Пожалуйста, подождите 10 минут.'))
   }
 }
 
 export function* watchGetLogin() {
-  yield Effects.takeEvery(TypesAuth.SET_LOGIN as never, workerGetLogin);
+  yield Effects.takeEvery(TypesAuth.SET_LOGIN as string, workerGetLogin);
 }
 
 // Auth
@@ -61,13 +61,17 @@ async function getAuthUserData() {
 
 function* workerGetAuth(): Generator<Effects.StrictEffect, void, never> {
   try {
+    yield Effects.put(authActions.toggleIsFetching(true));
     const data: ApiTypes<ProfileType> = yield Effects.call(getAuthUserData);
     console.log('data from auth saga', data)
-    yield Effects.put(authActions.toggleIsFetching(true));
-    if (data.resultCode === resultCodeEnum.Success) {
-      yield Effects.put(authActions.setAuthUserData(data.items, true));
-    } else if (data.resultCode === resultCodeEnum.NotAuth) {
-      yield Effects.put(authActions.setAuthUserData(null, false));
+    switch(data.resultCode) {
+      case resultCodeEnum.Success:
+        yield Effects.put(authActions.setAuthUserData(data.items, true));
+        break;
+      case resultCodeEnum.NotAuth:
+        yield Effects.put(authActions.setAuthUserData(null, false));
+        history.push('/dashboard/');
+        break;
     }
     yield Effects.delay(1700);
     yield Effects.put(authActions.toggleIsFetching(false));
@@ -92,7 +96,7 @@ export function* workerGetLogout(): Generator<Effects.StrictEffect, void, never>
     const data: ApiTypes = yield Effects.call(getLogout);
     if (data.resultCode === resultCodeEnum.Success) {
       yield Effects.put(authActions.setAuthUserData(null, false));
-
+      history.push('/dashboard/');
     }
   } catch (e) {
     console.error(e);
@@ -102,6 +106,3 @@ export function* workerGetLogout(): Generator<Effects.StrictEffect, void, never>
 export function* watchGetLogout() {
   yield Effects.takeEvery(TypesAuth.SET_LOGOUT, workerGetLogout);
 }
-
-
-

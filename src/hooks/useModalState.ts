@@ -1,8 +1,7 @@
 import React from "react";
 
-
 export const useModalState = ({ initialOpen = false } = {}) => {
-  const [isOpen, setIsOpen] = React.useState(initialOpen);
+  const [isOpen, setIsOpen] = React.useState<boolean>(initialOpen);
 
   const onOpen = () => {
     setIsOpen(true);

@@ -16,27 +16,6 @@
     max-width: 750px;
   }
 
-  &__search {
-    width: 230px;
-    padding-left: 10px;
-    height: 32px;
-    border-radius: 10px;
-    border: 1px solid #0084a4;
-    background-color: #ffffff;
-    margin-bottom: 30px;
-    padding: 1px 0;
-    padding-left: 10px;
-    font-family: sans-serif;
-    font-size: 14px;
-    margin-right: 7px;
-    outline: none;
-
-    padding-right: 35px;
-    &_id {
-      width: 60px;
-    }
-  }
-
   &__col {
     padding-right: 35px;
     font-size: 14px;
@@ -57,30 +36,9 @@
     width: 49px;
   }
 
-  &__button {
-    background-image:  url(../assets/img/search-icon.png);
-    background-size: 15px;
-    width: 15px;
-    height: 15px;
-    background-color: transparent;
-    border: none;
-    position: relative;
-    top: 2px;
-    right: 33px;
-    z-index: 10000;
-    cursor: pointer;
-    outline: none;
-  }
-
   &__result {
     padding: 5px 0 15px 0;
   }
 
-  &__notfound {
-    text-decoration: none;
-    color: #000;
-    margin-top: 10px;
-    cursor: pointer;
-    font-weight: 600;
-  }
+
 }

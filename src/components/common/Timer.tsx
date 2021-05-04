@@ -2,6 +2,12 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { authActions } from '../../redux/actions/auth';
 
+type TimerType = {
+  visible: boolean;
+  text: string;
+  type: string;
+}
+
 function Timer({ visible, text, type }: TimerType) {
   // 19 - количество секунд в таймере
   const [time, setTime] = React.useState(19);
@@ -29,9 +35,3 @@ function Timer({ visible, text, type }: TimerType) {
 }
 
 export default Timer;
-
-type TimerType = {
-  visible: boolean;
-  text: string;
-  type: string;
-}

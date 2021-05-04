@@ -5,15 +5,15 @@ import { searchApi } from '../../api/searchApi';
 import { UserProfileType, ActionSaveEditType, ActionType } from './../../types/types';
 import { resultCodeEnum } from "../../enum/resultCode";
 
-async function getUserProfile(id: number) {
+async function getUserProfile(id: string) {
   const response = await searchApi.getOneUser(id);
   return response.data;
 }
 
-function* workerGetUserProfile(action: ActionType<string, number>): Generator<Effects.StrictEffect, void, never> {
+export function* workerGetUserProfile(action: ActionType<string, string>): Generator<Effects.StrictEffect, void, never> {
   try {
-    const data: ApiTypes<UserProfileType> = yield Effects.call(getUserProfile, action.payload);
     yield Effects.put(userProfileActions.toggleIsFetching(true));
+    const data: ApiTypes<UserProfileType> = yield Effects.call(getUserProfile, action.payload);
     switch (data.resultCode) {
       case resultCodeEnum.Success:
         yield Effects.put(userProfileActions.setUser(data.items));
@@ -21,21 +21,19 @@ function* workerGetUserProfile(action: ActionType<string, number>): Generator<Ef
         yield Effects.put(userProfileActions.toggleIsFetching(false));
         break;
       case resultCodeEnum.NotFound:
+        yield Effects.put(userProfileActions.setUser(null));
         yield Effects.put(userProfileActions.notFoundUser(data.message));
         yield Effects.delay(1700);
         yield Effects.put(userProfileActions.toggleIsFetching(false));
         break;
-      default:
-        break
     }
-
   } catch (e) {
     console.log(e);
   }
 }
 
 export function* watchUserProfile() {
-  yield Effects.takeEvery(TypesUserProfile.LOAD_USER as never, workerGetUserProfile);
+  yield Effects.takeEvery(TypesUserProfile.LOAD_USER as string, workerGetUserProfile);
 }
 
 // Сохранение профиля
@@ -46,21 +44,27 @@ async function editProfile(formData: UserProfileType, userId: number) {
 
 function* workerEditProfile(action: ActionType<string, ActionSaveEditType>): Generator<Effects.StrictEffect, void, never> {
   try {
+    yield Effects.put(userProfileActions.toggleIsSaved(true));
     const data: ApiTypes = yield Effects.call(
       editProfile,
       action.payload.formData,
       action.payload.userId
     );
-    yield Effects.put(userProfileActions.toggleIsFetching(true));
+    switch (data.resultCode) {
+      case resultCodeEnum.Success:
+        yield Effects.put(userProfileActions.toggleIsSaved(false));
+        break;
+    }
+
     yield Effects.delay(1700);
+
     // TODO: профиль сохранен UI
-    yield Effects.put(userProfileActions.toggleIsFetching(false));
-    console.log(data);
-    //yield put(searchUserActions.saveProfile(data));
+
   } catch (e) {
     console.log(e);
   }
 }
+
 export function* watchEditProfile() {
-  yield Effects.takeEvery(TypesUserProfile.SAVE_PROFILE as never, workerEditProfile);
+  yield Effects.takeEvery(TypesUserProfile.SAVE_PROFILE as string, workerEditProfile);
 }
