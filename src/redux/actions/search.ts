@@ -1,4 +1,4 @@
-import { SearchFullNameType } from "../../types/types";
+import { SearchType } from "../../types/types";
 
 export const TypesSearch = {
   SET_SEARCH: '/reducers/search/SET_SEARCH' as const,
@@ -9,7 +9,7 @@ export const TypesSearch = {
 };
 
 export const searchActions = {
-  setSearchAnswer: (searchUser: Array<SearchFullNameType>) => ({
+  setSearchAnswer: (searchUser: Array<SearchType>) => ({
     type: TypesSearch.SET_SEARCH,
     payload: searchUser,
   }),

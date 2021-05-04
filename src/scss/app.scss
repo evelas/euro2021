@@ -42,4 +42,16 @@ hr {
     display: grid;
     grid-template-rows: auto 1fr auto;
   }
+  &__notfound {
+    text-decoration: none;
+    color: #000;
+    margin-top: 10px;
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  &__notfoundTd {
+    text-align: center;
+    padding: 20px;
+  }
 }

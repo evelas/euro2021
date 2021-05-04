@@ -8,7 +8,8 @@ type ActionsType = InferActionsTypes<typeof userProfileActions>;
 const initialState = {
   userData: null as Nullable<UserProfileType>,
   isFetching: false,
-  notFound: ''
+  notFound: '',
+  isSaved: false
 };
 
 const oneUserReducer = (state = initialState, action: ActionsType): InitialStateUserProfileType => {
@@ -28,6 +29,11 @@ const oneUserReducer = (state = initialState, action: ActionsType): InitialState
         ...state,
         notFound: action.payload,
       };
+    case TypesUserProfile.IS_SAVED:
+      return {
+        ...state,
+        isSaved: action.payload
+      }
     default:
       return state;
   }

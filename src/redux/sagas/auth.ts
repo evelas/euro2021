@@ -11,6 +11,7 @@ async function getLogin(login: string, password: string, forgotMe: boolean) {
   const response = await authApi.login(login, password, forgotMe);
   return response.data;
 }
+
 // 1 параметр генератора StrictEffect
 // Интерфейс с any payload / type
 function* workerGetLogin(action: ActionType<string, LoginFormValuesType>): Generator<Effects.StrictEffect, void, never> {
@@ -21,7 +22,6 @@ function* workerGetLogin(action: ActionType<string, LoginFormValuesType>): Gener
       action.payload.password,
       action.payload.forgotMe,
     );
-    console.log('data from login saga', data);
     switch(data.resultCode) {
       case resultCodeEnum.Success:
         yield Effects.put(authActions.loadUserData());
@@ -64,11 +64,14 @@ function* workerGetAuth(): Generator<Effects.StrictEffect, void, never> {
     yield Effects.put(authActions.toggleIsFetching(true));
     const data: ApiTypes<ProfileType> = yield Effects.call(getAuthUserData);
     console.log('data from auth saga', data)
-    if (data.resultCode === resultCodeEnum.Success) {
-      yield Effects.put(authActions.setAuthUserData(data.items, true));
-    } else if (data.resultCode === resultCodeEnum.NotAuth) {
-      yield Effects.put(authActions.setAuthUserData(null, false));
-      history.push('/dashboard/');
+    switch(data.resultCode) {
+      case resultCodeEnum.Success:
+        yield Effects.put(authActions.setAuthUserData(data.items, true));
+        break;
+      case resultCodeEnum.NotAuth:
+        yield Effects.put(authActions.setAuthUserData(null, false));
+        history.push('/dashboard/');
+        break;
     }
     yield Effects.delay(1700);
     yield Effects.put(authActions.toggleIsFetching(false));

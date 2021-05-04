@@ -25,12 +25,11 @@ export type UserProfileType = {
   experience: string;
   problemhealth: string;
   decision: string;
-  new_decision: string;
+  result: string;
   avatardecision: string;
   status: string;
   activation: string;
   calendar: string;
-  graphs: string;
 }
 
 export type LoginFormValuesType = {
@@ -49,10 +48,20 @@ export type ActionType<T, S> = {
   payload: S
 }
 
-export type SearchFullNameType = {
+export type SearchType = {
   id: number;
   fullName: string;
+  phone?: string;
+  birthday?: string;
+  email?: string;
+  calendar?: string;
+  result?: string;
 }
+
+export type SearchFormik = {
+  [field: string]: string | string[];
+}
+
 
 // save after edit profile
 export type ActionSaveEditType = {

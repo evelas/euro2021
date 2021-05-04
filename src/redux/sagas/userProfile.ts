@@ -26,8 +26,6 @@ export function* workerGetUserProfile(action: ActionType<string, string>): Gener
         yield Effects.delay(1700);
         yield Effects.put(userProfileActions.toggleIsFetching(false));
         break;
-      default:
-        break
     }
   } catch (e) {
     console.log(e);
@@ -46,18 +44,22 @@ async function editProfile(formData: UserProfileType, userId: number) {
 
 function* workerEditProfile(action: ActionType<string, ActionSaveEditType>): Generator<Effects.StrictEffect, void, never> {
   try {
-    yield Effects.put(userProfileActions.toggleIsFetching(true));
+    yield Effects.put(userProfileActions.toggleIsSaved(true));
     const data: ApiTypes = yield Effects.call(
       editProfile,
       action.payload.formData,
       action.payload.userId
     );
+    switch (data.resultCode) {
+      case resultCodeEnum.Success:
+        yield Effects.put(userProfileActions.toggleIsSaved(false));
+        break;
+    }
 
     yield Effects.delay(1700);
+
     // TODO: профиль сохранен UI
-    yield Effects.put(userProfileActions.toggleIsFetching(false));
-    console.log(data);
-    //yield put(searchUserActions.saveProfile(data));
+
   } catch (e) {
     console.log(e);
   }

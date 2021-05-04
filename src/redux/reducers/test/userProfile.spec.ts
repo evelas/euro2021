@@ -8,7 +8,8 @@ describe("should correct userProfile logic work", () => {
       state = {
           userData: null,
           isFetching: false,
-          notFound: ''
+          notFound: '',
+          isSaved: false
       }
   })
 

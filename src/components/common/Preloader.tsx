@@ -6,9 +6,7 @@ interface PropsType {
   fullPage?: boolean;
 }
 
-
 const Preloader: React.FC<PropsType> = ({fullPage = false}: PropsType) => {
-  console.log(fullPage)
   return (
     <div className={classNames('preloader', {
       preloader_max: fullPage === true

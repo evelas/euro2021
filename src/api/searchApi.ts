@@ -1,9 +1,9 @@
 import { instansAxios, ApiTypes } from "./api";
-import { SearchFullNameType, UserProfileType } from '../types/types';
+import { SearchType, UserProfileType } from '../types/types';
 
 export const searchApi = {
   getSearch(text: string) {
-    return instansAxios.get<ApiTypes<Array<SearchFullNameType>>>(`search?text=${text}`);
+    return instansAxios.get<ApiTypes<Array<SearchType>>>(`search?text=${text}`);
   },
   getOneUser(id: string) {
     return instansAxios.get<ApiTypes>(`profile/${id}`);
@@ -13,4 +13,3 @@ export const searchApi = {
   },
 };
 
-// authAPI.getAuthData().then(res => res.data);

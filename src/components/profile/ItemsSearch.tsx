@@ -1,7 +1,7 @@
 import React from 'react'
-import { SearchFullNameType } from '../../types/types'
+import { SearchType } from '../../types/types'
 
-const ItemsSearch: React.FC<SearchFullNameType> = ({id, fullName}: SearchFullNameType) => {
+const ItemsSearch: React.FC<SearchType> = ({id, fullName}: SearchType) => {
 
   return (
     <a className="home__link" href={'/dashboard/user/' + id} target="_blank" rel="noreferrer">

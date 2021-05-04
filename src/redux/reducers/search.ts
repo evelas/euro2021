@@ -1,5 +1,5 @@
 import { TypesSearch, searchActions } from './../actions';
-import { SearchFullNameType, Nullable } from '../../types/types';
+import { SearchType, Nullable } from '../../types/types';
 import { InferActionsTypes } from './index';
 
 
@@ -7,7 +7,7 @@ export type InitialStateSearchType = typeof initialState;
 type ActionsType = InferActionsTypes<typeof searchActions>;
 
 const initialState = {
-  searchAnswer: null as Nullable<Array<SearchFullNameType>>,
+  searchAnswer: null as Nullable<Array<SearchType>>,
   searchText: '' as string | string[],
   notFound: '',
   isFetching: false,

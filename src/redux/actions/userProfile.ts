@@ -6,6 +6,7 @@ export const TypesUserProfile = {
   LOAD_USER: '/reducers/userProfile/LOAD_USER' as const,
   SAVE_PROFILE: '/reducers/userProfile/SAVE_PROFILE' as const,
   NOT_FOUND_USER: '/reducers/userProfile/NOT_FOUNDS_USER' as const,
+  IS_SAVED: '/reducers/userProfile/IS_SAVED' as const,
 };
 
 export const userProfileActions = {
@@ -32,4 +33,8 @@ export const userProfileActions = {
       userId: userId,
     },
   }),
+  toggleIsSaved: (isSaved: boolean) => ({
+    type: TypesUserProfile.IS_SAVED,
+    payload: isSaved
+  })
 };

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Home, Login, UserProfile, NotFound } from './pages/index';
+import { Home, Login, UserProfile, NotFound, Recruit } from './pages/index';
 import { Router, Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import createAppStore from './redux/redux-store';
@@ -16,6 +16,7 @@ const App = () => {
             <Route exact path="/dashboard/" component={Login} />
             <Route exact path="/dashboard/home" component={Home} />
             <Route path="/dashboard/user/" component={UserProfile} />
+            <Route exact path="/dashboard/recruit" component={Recruit} />
             <Route path="/dashboard/*" component={NotFound} />
           </Switch>
         </PersistGate>

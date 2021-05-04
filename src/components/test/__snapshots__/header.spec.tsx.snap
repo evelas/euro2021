@@ -7,7 +7,7 @@ exports[`Header component should render Header component 1`] = `
   <h1
     class="header__title"
   >
-    UEFA EURO 2020
+    UEFA EURO 2021
   </h1>
   <h2
     class="header__about"

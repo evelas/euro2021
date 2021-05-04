@@ -7,7 +7,7 @@ import userProfile from './userProfile'
 const reducers = combineReducers({
   auth,
   search,
-  userProfile
+  userProfile,
 });
 
 type RootReducerType = typeof reducers;
